@@ -5,7 +5,6 @@ Are you a parent that drives your child and their friends to school every day? P
 
 - Login Screen 
   - Users can create accounts ([Firebase Authentication](https://firebase.google.com/docs/auth))
-    - Specific Tutprials: [one](https://blog.codemagic.io/firebase-authentication-google-sign-in-using-flutter/) and [two](https://codewithandrea.com/articles/simple-authentication-flow-with-flutter/)
   - User Profile: name and kid/parent designation 
 - Home/Calendar Screen 
   - Can see across weeks as well as a daily view (who is picking up morning/afternoon)
@@ -92,14 +91,14 @@ Are you a parent that drives your child and their friends to school every day? P
 | ------------ | --------------------------------------------- | ------------------------------------------------------------------------------ |
 | 1            | On boarding tasks                             | Meet the team, set meeting dates, schedule design day.                         |
 | 2            | Research tech stack and create wireframes     | Practice apps with chosen tech stack + wireframes                              |
-| 3            | Code app screens, code alarm logic and sounds | 50% or more progress on all pages. Completed call logic.                       |
+| 3            | Code app screens (login, home/calendar, create reminder, nudge for pickup, trade-day page) | 50% or more progress on all pages. Completed call logic.                       |
 | 4            | Code app screens, code call logic             | 80% or more progress on all screens. Completed database functionality.         |
 | 5            | Code app screens and integrate backend        | functioning MVP                                                                |
 | 6            | Front end touch ups and backend stretch goals | Polished MVP                                                                   |
 | 7            | Stretch Goals                                 | N/A                                                                            |
 | 8            | Create Presentation                           | Hammer out the order of presenters, plan/gimmick, and complete slideshow/video |
-| 9            | Practice Presentation                         | N/A                                                                            |
-| Presentation | Wow the judges like I know you will :)        | The growth you made while in Projects! ＼(^-^)／                               |
+| 9            | Practice Presentations                         | N/A                                                                            |
+| Presentation | You're almost donee!        | Can finally put ACM Projects on your resume ;P jk jk be proud of the app you created :D                           |
 
 
 
