@@ -50,8 +50,21 @@ Are you a parent that drives your child and their friends to school every day? P
 - [Firebase](https://firebase.google.com/docs/cli) or [MongoDB](https://docs.mongodb.com/manual/installation/)
 - [Git](https://git-scm.com/downloads)
 
+# Calendar Options
+- Flutter Options
+  - [Getting started with Flutter Event Calendar] (https://help.syncfusion.com/flutter/calendar/getting-started)
+  - [Table Calendar API] (https://pub.dev/packages/table_calendar)
+  - [Comparison Of Libraries] (https://medium.com/flutter-community/flutter-calendar-library-comparison-c08d5ba3cc9e)
+  - [Whole Collection of Options] (https://flutterawesome.com/tag/calendar/)
+- React Native Calendar Libraries 
+  - [5 different options] (https://blog.expo.dev/5-easy-to-use-react-native-calendar-libraries-e830a97d5bf7)
+  - [Expo Calendar] (https://docs.expo.dev/versions/v41.0.0/sdk/calendar/)
+  - [React Native Calendar] (https://react-native-components.gitbook.io/calendar/)
 
-# IN PROGRESS -----------------------------------------------
+# User Authentication 
+- [Google Sign-In & Firebase Authentication Using Flutter] (https://blog.codemagic.io/firebase-authentication-google-sign-in-using-flutter/) 
+- [Super Simple Authentication Flow with Flutter & Firebase] (https://codewithandrea.com/articles/simple-authentication-flow-with-flutter/)
+
 
 # Tutorials
 
@@ -59,6 +72,8 @@ Are you a parent that drives your child and their friends to school every day? P
 - [React JS](https://www.youtube.com/watch?v=w7ejDZ8SWv8) 1hr 48 minutes
 - [Official Firebase/React Native tutorial](https://firebase.googleblog.com/2016/01/the-beginners-guide-to-react-native-and_84.html) : blog / how to article
 - [FreeCodeCamp Firebase Article](https://www.freecodecamp.org/news/react-native-firebase-tutorial/)
+- [Set-up/Installation of Flutter Documentation] (https://docs.flutter.dev/get-started/editor)
+- [Set-up/Installation of Flutter Tutorial] (-	https://medium.com/codechai/flutter-installation-setup-with-android-studio-326dea65f609)
 
 # Resources
 
@@ -68,17 +83,6 @@ Are you a parent that drives your child and their friends to school every day? P
 - [Getting started with React](https://facebook.github.io/react-native/docs/getting-started)
 - [Getting started with Flutter](https://flutter.dev/docs/get-started/install)
 - [Overview of making API calls](https://snipcart.com/blog/apis-integration-usage-benefits)
-
-
-For icons:
-
-- https://material.io/resources/icons/?style=baseline
-- https://materialdesignicons.com/
-- https://www.flaticon.com/
-- https://www.pexels.com/
-- https://commons.wikimedia.org/wiki/Category:Images
-- https://unsplash.com/images/stock
-
 
 
 
@@ -96,5 +100,16 @@ For icons:
 | 8            | Create Presentation                           | Hammer out the order of presenters, plan/gimmick, and complete slideshow/video |
 | 9            | Practice Presentation                         | N/A                                                                            |
 | Presentation | Wow the judges like I know you will :)        | The growth you made while in Projects! ＼(^-^)／                               |
+
+
+
+For icons:
+
+- https://material.io/resources/icons/?style=baseline
+- https://materialdesignicons.com/
+- https://www.flaticon.com/
+- https://www.pexels.com/
+- https://commons.wikimedia.org/wiki/Category:Images
+- https://unsplash.com/images/stock
 
 
