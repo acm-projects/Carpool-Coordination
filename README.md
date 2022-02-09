@@ -91,12 +91,12 @@ Are you a parent that drives your child and their friends to school every day? P
 | ------------ | --------------------------------------------- | ------------------------------------------------------------------------------ |
 | 1            | On boarding tasks                             | Meet the team, set meeting dates, schedule design day.                         |
 | 2            | Research tech stack and create wireframes     | Practice apps with chosen tech stack + wireframes                              |
-| 3            | Code app screens (login, home/calendar, create reminder, nudge for pickup, trade-day page) | 50% or more progress on all pages. Completed call logic.                       |
-| 4            | Code app screens, code call logic             | 80% or more progress on all screens. Completed database functionality.         |
-| 5            | Code app screens and integrate backend        | functioning MVP                                                                |
-| 6            | Front end touch ups and backend stretch goals | Polished MVP                                                                   |
-| 7            | Stretch Goals                                 | N/A                                                                            |
-| 8            | Create Presentation                           | Hammer out the order of presenters, plan/gimmick, and complete slideshow/video |
+| 3            | Code app screens (login, home/calendar, create reminder, nudge for pickup, trade-day page) | 50% or more progress on all pages. Finished home/calendar screen (can see across weeks, days, etc).|
+| 4            | Finish up coding app screens. Code create reminders functionality. Research UserAuth and attempt to create accounts | Completed the look of all screens. Users can create reminders. Made progress in creating accounts|
+| 5            | Finish up UserAuth, creating reminders and recieving notification, start trade day functionality and nudge for pickup creation/notifications.        | Users can log in from home screen, create reminders and recieve notifications |
+| 6            | Keep working on all functionalities  | all MVP should be 80% done                                                                   |
+| 7            | Integration of front and back end                   | functioning MVP                                                                          |
+| 8            | Create Presentation and polish MVP                        | Hammer out the order of presenters, plan/gimmick, and complete slideshow/video |
 | 9            | Practice Presentations                         | N/A                                                                            |
 | Presentation | You're almost donee!        | Can finally put ACM Projects on your resume ;P jk jk be proud of the app you created :D                           |
 
