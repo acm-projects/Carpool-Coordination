@@ -24,6 +24,8 @@ Are you a parent that drives your child and their friends to school every day? P
 1. In-app group messaging 
 2. Auto-scheduler to auto generate a schedule that fits parents availabilities and flag conflicts 
 3. Allow users to add own google calendars
+4. Uber-like map (show route, who's being picked up first, eta, etc)
+5. friend-to-friend 
 
 # Tech Stack
 
