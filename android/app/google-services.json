@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "531122730326",
+    "project_id": "carpoolcoordination-777bd",
+    "storage_bucket": "carpoolcoordination-777bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531122730326:android:1a3993fc923694722492f7",
+        "android_client_info": {
+          "package_name": "com.example.secondapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531122730326-bepqnt1c8954e8righn357e7tnj51dht.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.secondapp",
+            "certificate_hash": "d67f8a01cb28c0f3e4efd58ff32db3b0970c75c7"
+          }
+        },
+        {
+          "client_id": "531122730326-j28mpkf2bjjkmm2n9dee77bq3n5t6pek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnbekIXH6m8YiE1uam_D6qeh7ge5hZZQ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531122730326-j28mpkf2bjjkmm2n9dee77bq3n5t6pek.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
