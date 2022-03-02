@@ -76,6 +76,7 @@ Are you a parent that drives your child and their friends to school every day? P
 - [Set-up/Installation of Flutter Documentation](https://docs.flutter.dev/get-started/editor)
 - [Set-up/Installation of Flutter Tutorial](https://medium.com/codechai/flutter-installation-setup-with-android-studio-326dea65f609)\
 - [CHAT APP](https://www.freecodecamp.org/news/build-a-chat-app-ui-with-flutter/)
+- [Another Chat App](https://medium.com/flutter-community/building-a-chat-app-with-flutter-and-firebase-from-scratch-9eaa7f41782e)
 
 # Resources
 
