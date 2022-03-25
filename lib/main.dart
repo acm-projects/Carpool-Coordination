@@ -1,6 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:secondapp/screens/CalendarOneScreen.dart';
+import 'package:secondapp/screens/calendar_screen.dart';
 import 'package:secondapp/screens/login_screen.dart';
+import 'package:secondapp/screens/theme.dart';
+
+import 'Services/theme_services.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,12 +20,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Email And Password Login',
-      theme: ThemeData(
+      debugShowCheckedModeBanner: false,
 
-        primarySwatch: Colors.blueGrey,
-      ),
+      theme:Themes.light,
+      darkTheme: Themes.dark,
+      themeMode: ThemeServices().theme,
+
       home: LoginScreen(),
 //test
     );
