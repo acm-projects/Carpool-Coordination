@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blueGrey,
       ),
-      home: ProfileApp(), // if u want to run one screen on its own, assign ur class to home: ,, default is LoginScreen()
+      home: LoginScreen(), // if u want to run one screen on its own, assign ur class to home: ,, default is LoginScreen()
 //test
 
     );
