@@ -31,7 +31,10 @@ dependencies:
   firebase_auth: ^3.3.9
   firebase_core: ^1.13.1
   syncfusion_flutter_calendar: ^19.4.54
-
+  firebase_messaging: ^11.2.8
+  overlay_support: ^1.2.1
+  flutter_local_notifications: ^9.4.0
+  rxdart: ^0.27.3
 
   flutter:
     sdk: flutter

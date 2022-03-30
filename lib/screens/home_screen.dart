@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:secondapp/model/user_model.dart';
 import 'package:secondapp/screens/login_screen.dart';
+import 'package:secondapp/model/pushnotifications_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
