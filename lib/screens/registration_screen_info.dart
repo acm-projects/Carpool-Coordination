@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'create_event.dart';
 import 'drive_history.dart';
-import 'home_screen.dart';
+
 
 class RegistrationScreenInfo extends StatefulWidget {
   const RegistrationScreenInfo({Key? key}) : super(key: key);

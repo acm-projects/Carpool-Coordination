@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:secondapp/model/user_model.dart';
 import 'package:secondapp/screens/backendhomescreen.dart';
-import 'package:secondapp/screens/home_screen.dart';
+
 import 'package:secondapp/screens/registration_screen_info.dart';
 
 class RegistrationScreen extends StatefulWidget {
