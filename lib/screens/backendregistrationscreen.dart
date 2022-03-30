@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:secondapp/model/user_model.dart';
 import 'package:secondapp/screens/backendhomescreen.dart';
+import 'package:secondapp/screens/home_screen.dart';
+import 'package:secondapp/screens/registration_screen_info.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -27,8 +29,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool parentPressed = false;
+    bool childPressed = false;
+    bool pressAttention1 = false;
+    bool pressAttention2 = false;
+
+    Color _buttonColor1 = Color.fromRGBO(144, 173, 198, 1);
+    Color _buttonColor2 = Colors.green;
     //first name field
     final firstNameField = TextFormField(
+      textAlign: TextAlign.center,
       autofocus: false,
       controller: firstNameEditingController,
       keyboardType: TextInputType.name,
@@ -47,16 +57,45 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.account_circle),
+        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        filled: true,
+        //prefixIcon: Icon(Icons.account_circle),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "First Name",
+        hintText: "Name",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
       ),
     );
 
+    final appBar = PreferredSize(
+      preferredSize: Size.fromHeight(45),
+      child: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+        title: Text(
+          'Carpool Coordination',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1,
+          ),
+        ),
+      ),
+    );
+
+    final parentChildQuestion = Text(
+      'Who is this account for?',
+      style: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+      ),
+      textAlign: TextAlign.left,
+    );
+
     final secondNameField = TextFormField(
+      textAlign: TextAlign.center,
       autofocus: false,
       controller: lastNameEditingController,
       keyboardType: TextInputType.name,
@@ -74,7 +113,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.account_circle),
+        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        filled: true,
+        //prefixIcon: Icon(Icons.account_circle),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Last Name",
         border: OutlineInputBorder(
@@ -84,6 +125,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
 
     final emailField = TextFormField(
+      textAlign: TextAlign.center,
       autofocus: false,
       controller: emailEditingController,
       keyboardType: TextInputType.emailAddress,
@@ -102,9 +144,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.mail_outline_rounded),
+        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        filled: true,
+        //prefixIcon: Icon(Icons.mail_outline_rounded),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Email Name",
+        hintText: "Email",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -112,6 +156,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
 
     final passwordField = TextFormField(
+      textAlign: TextAlign.center,
       autofocus: false,
       controller: passwordEditingController,
       obscureText: true,
@@ -129,9 +174,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.key_rounded),
+        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        filled: true,
+        //prefixIcon: Icon(Icons.key_rounded),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Password Name",
+        hintText: "Password",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -139,11 +186,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
 
     final confirmPasswordField = TextFormField(
+      textAlign: TextAlign.center,
       autofocus: false,
       controller: confirmPasswordEditingController,
       obscureText: true,
       validator: (value) {
-        if (passwordEditingController.text != confirmPasswordEditingController.text) {
+        if (passwordEditingController.text !=
+            confirmPasswordEditingController.text) {
           return "Password Doesn't Match";
         }
         return null;
@@ -153,7 +202,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.key_rounded),
+        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        filled: true,
+        //prefixIcon: Icon(Icons.key_rounded),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Confirm Password",
         border: OutlineInputBorder(
@@ -164,17 +215,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     //signup button
     final signUpButton = Material(
-      elevation: 5,
+      elevation: 2,
       borderRadius: BorderRadius.circular(10),
-      color: Colors.greenAccent,
+      color: Color.fromRGBO(51, 54, 82, 1),
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        minWidth: MediaQuery.of(context).size.width,
+        minWidth: 38,
         onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => RegistrationScreenInfo()));
           signUp(emailEditingController.text, passwordEditingController.text);
         },
         child: Text(
-          "Sign Up",
+          "Continue",
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
@@ -185,10 +240,24 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color.fromRGBO(51, 54, 82, 1),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(10),
+          ),
+        ),
+        title: Text(
+          'Carpool Coordination',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1,
+          ),
+        ),
+        centerTitle: true,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.greenAccent),
+          icon: Icon(Icons.arrow_back, color: Color.fromRGBO(250, 208, 44, 1)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -199,7 +268,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           child: Container(
             color: Colors.white,
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(30.0),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -207,38 +276,101 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(
-                      height: 100,
+                      height: 91,
                       child: Image.asset(
                         "assets/Stray-Kids-Logo.png",
                         fit: BoxFit.contain,
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
                     firstNameField,
                     SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                     secondNameField,
                     SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                     emailField,
                     SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                     passwordField,
                     SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                     confirmPasswordField,
                     SizedBox(
-                      height: 20,
+                      height: 15,
+                    ),
+                    parentChildQuestion,
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      child: new Row(
+                        children: <Widget>[
+                          //const Spacer(),
+                          Expanded(
+                            child: Center(
+                              child: ButtonTheme(
+                                minWidth: 130,
+                                height: 100,
+                                child: RaisedButton(
+                                  color: pressAttention1
+                                      ? _buttonColor2
+                                      : _buttonColor1,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)),
+                                  onPressed: () => setState(
+                                      () => pressAttention1 = !pressAttention1),
+                                  child: Text(
+                                    'Parent',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Center(
+                              child: ButtonTheme(
+                                minWidth: 130,
+                                height: 100,
+                                child: RaisedButton(
+                                  child: Text(
+                                    'Child',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)),
+                                  color: _buttonColor1,
+                                  onPressed: () => setState(
+                                    () {
+                                      _buttonColor1 = Colors.green;
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
                     ),
                     signUpButton,
                     SizedBox(
-                      height: 20,
+                      height: 15,
                     )
                   ],
                 ),
