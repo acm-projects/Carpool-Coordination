@@ -24,7 +24,9 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     //email feed
+
     final emailField = TextFormField(
+      textAlign: TextAlign.center,
       autofocus: false,
       controller: emailController,
       keyboardType: TextInputType.emailAddress,
@@ -43,8 +45,10 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.mail_outline_rounded),
+        //prefixIcon: Icon(Icons.mail_outline_rounded),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        filled: true,
         hintText: "Email",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -53,6 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     final passwordField = TextFormField(
+      textAlign: TextAlign.center,
       autofocus: false,
       controller: passwordController,
       obscureText: true,
@@ -70,8 +75,10 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.key_rounded),
+        //prefixIcon: Icon(Icons.key_rounded),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        filled: true,
         hintText: "Password",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -80,18 +87,15 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     final loginButton = Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(10),
-      color: Colors.greenAccent,
+      elevation: 2,
+      borderRadius: BorderRadius.circular(15),
+      color: Color.fromRGBO(144, 173, 198, 1),
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        minWidth: MediaQuery
-            .of(context)
-            .size
-            .width,
+        minWidth: 225,
+        height: 10,
         onPressed: () {
           signIn(emailController.text, passwordController.text);
-
         },
         child: Text(
           "Login",
@@ -102,8 +106,71 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
 
+    final appBar = PreferredSize(
+      preferredSize: Size.fromHeight(45),
+      child: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+        title: Text(
+          'Carpool Coordination',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1,
+          ),
+        ),
+      ),
+    );
+
+    //Sign up button
+    final signUpButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(10),
+      color: Color.fromRGBO(51, 54, 82, 1),
+      child: MaterialButton(
+        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        minWidth: 500,
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => RegistrationScreen()));
+          //signUp(emailEditingController.text, passwordEditingController.text);
+        },
+        child: Text(
+          "Sign Up",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+
+    // Don't have an account text
+    final noAcc = Text(
+      'Dont have an account?',
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+      ),
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(51, 54, 82, 1),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(10),
+          ),
+        ),
+        title: Text(
+          'Carpool Coordination',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1,
+          ),
+        ),
+      ),
       body: Center(
         child: SingleChildScrollView(
           child: Container(
@@ -117,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(
-                      height: 200,
+                      height: 150,
                       child: Image.asset(
                         "assets/Stray-Kids-Logo.png",
                         fit: BoxFit.contain,
@@ -138,28 +205,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: 15,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text("Dont have an account?"),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        RegistrationScreen()));
-                          },
-                          child: Text(
-                            " SignUp",
-                            style: TextStyle(
-                                color: Colors.greenAccent,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15),
-                          ),
-                        ),
-                      ],
-                    )
+                    SizedBox(
+                      height: 150,
+                    ),
+                    noAcc,
+                    SizedBox(
+                      height: 15,
+                    ),
+                    signUpButton,
+                    SizedBox(
+                      height: 15,
+                    ),
                   ],
                 ),
               ),
@@ -175,12 +231,11 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {
       await _auth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) =>
-      {
-        Fluttertoast.showToast(msg: "Login Successful"),
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => HomeScreen()))
-      })
+          .then((uid) => {
+                Fluttertoast.showToast(msg: "Login Successful"),
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => HomeScreen()))
+              })
           .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
       });
