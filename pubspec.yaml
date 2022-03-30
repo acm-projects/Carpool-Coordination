@@ -33,6 +33,7 @@ dependencies:
   syncfusion_flutter_calendar: ^19.4.54
 
 
+
   flutter:
     sdk: flutter
   fluttertoast: ^8.0.9

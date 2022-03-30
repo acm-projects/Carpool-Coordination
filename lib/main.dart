@@ -1,6 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:secondapp/screens/current_ride_kid.dart';
+import 'package:secondapp/screens/current_ride_parent.dart';
 import 'package:secondapp/screens/login_screen.dart';
+import 'package:secondapp/screens/my_profile_screen.dart';
+import 'package:secondapp/screens/recent_drive_screen.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,8 +25,9 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blueGrey,
       ),
-      home: LoginScreen(),
+      home: CRKid(), // if u want to run one screen on its own, assign ur class to home: ,, default is LoginScreen()
 //test
+
     );
   }
 }
