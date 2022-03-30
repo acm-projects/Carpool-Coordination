@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:secondapp/screens/home_screen.dart';
-import 'package:secondapp/screens/registration_screen.dart';
+import 'package:secondapp/screens/calendar_screen.dart';
+import 'package:secondapp/screens/backendhomescreen.dart';
+import 'package:secondapp/screens/backendregistrationscreen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -96,6 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
         height: 10,
         onPressed: () {
           signIn(emailController.text, passwordController.text);
+
         },
         child: Text(
           "Login",
@@ -231,11 +233,12 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {
       await _auth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) => {
-                Fluttertoast.showToast(msg: "Login Successful"),
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => HomeScreen()))
-              })
+          .then((uid) =>
+      {
+        Fluttertoast.showToast(msg: "Login Successful"),
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => CalendarScreen()))
+      })
           .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
       });
