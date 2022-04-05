@@ -114,51 +114,6 @@ class _CRParentState extends State<CRParent> {
         ),
 
       ),
-
-
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.people_rounded,
-              color: Color.fromRGBO(33, 36, 52, 1),
-            ),
-            label: 'My Groups',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.calendar_month_rounded,
-              color: Color.fromRGBO(33, 36, 52, 1),
-            ),
-            label: 'Schedule',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_rounded,
-              color: Color.fromRGBO(33, 36, 52, 1),
-            ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.history_rounded,
-              color: Color.fromRGBO(33, 36, 52, 1),
-            ),
-            label: 'history',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_rounded,
-              color: Color.fromRGBO(33, 36, 52, 1),
-            ),
-            label: 'profile',
-          ),
-        ],
-      ),
     );
   }
 }

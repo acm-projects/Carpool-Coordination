@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -21,7 +22,11 @@ class CalendarScreen extends StatefulWidget {
 
 class _CalendarScreenState extends State<CalendarScreen> {
   DateTime _selectedDate = DateTime.now();
+  String formattedDate = DateFormat('M/d/yyyy').format(DateTime.now());
+
   var notifyHelper;
+
+
 
   @override
   void initState() {
@@ -38,10 +43,201 @@ class _CalendarScreenState extends State<CalendarScreen> {
         children: [
           _addTaskBar(),
           _addDateBar(),
+          _showTasks(),
 
         ],
       ),
     );
+  }
+
+  _showTasks() {
+    return StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('rides').snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return Container(
+            height: MediaQuery.of(context).size.height/2.4,
+            width: MediaQuery.of(context).size.width,
+
+            child: ListView(
+              children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+                if(data['date'] == formattedDate){
+                  return Container(
+                    padding:
+                    EdgeInsets.symmetric(horizontal: 10,),
+                    width: MediaQuery.of(context).size.width,
+                    margin: EdgeInsets.only(bottom: 8, top: 8),
+                    child: Container(
+                      padding: EdgeInsets.all(16),
+                      //  width: SizeConfig.screenWidth * 0.78,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: primaryClr,
+                      ),
+                      child: Row(children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Parent: ${data['parent']}",
+                                style: GoogleFonts.lato(
+                                  textStyle: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 12,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.access_time_rounded,
+                                    color: Colors.grey[200],
+                                    size: 18,
+                                  ),
+                                  SizedBox(width: 4),
+                                  Text(
+                                    "${data['startTime']} - ${data['endTime']}",
+                                    style: GoogleFonts.lato(
+                                      textStyle:
+                                      TextStyle(fontSize: 13, color: Colors.grey[100]),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 12),
+                              Text(
+                                "Carpoolers: ${data['carpooler']}",
+                                style: GoogleFonts.lato(
+                                  textStyle: TextStyle(fontSize: 15, color: Colors.grey[100]),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          height: 60,
+                          width: 0.5,
+                          color: Colors.grey[200]!.withOpacity(0.7),
+                        ),
+                        RotatedBox(
+                          quarterTurns: 3,
+                          child: Text(
+                            "Ride",
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
+                  );
+                }
+                return SizedBox(
+
+                );/*Container(
+                  padding:
+                  EdgeInsets.symmetric(horizontal: 10,),
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.only(bottom: 8, top: 8),
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    //  width: SizeConfig.screenWidth * 0.78,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: primaryClr,
+                    ),
+                    child: Row(children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Parent: ${data['parent']}",
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.access_time_rounded,
+                                  color: Colors.grey[200],
+                                  size: 18,
+                                ),
+                                SizedBox(width: 4),
+                                Text(
+                                  "${data['startTime']} - ${data['endTime']}",
+                                  style: GoogleFonts.lato(
+                                    textStyle:
+                                    TextStyle(fontSize: 13, color: Colors.grey[100]),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 12),
+                            Text(
+                              "Carpoolers: ${data['carpooler']}",
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(fontSize: 15, color: Colors.grey[100]),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        height: 60,
+                        width: 0.5,
+                        color: Colors.grey[200]!.withOpacity(0.7),
+                      ),
+                      RotatedBox(
+                        quarterTurns: 3,
+                        child: Text(
+                          "Ride",
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ),
+                );*/
+
+                /*Card(
+                  margin: EdgeInsets.only(bottom: 10, top: 10),
+                  child: ListTile(
+                    title: Text(data['parent']),
+                    subtitle: Text(data['carpooler']),
+                  ),
+                );*/
+              }).toList(),
+            ),
+          );
+  });
   }
 
   /*_showTasks() {
@@ -95,6 +291,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
         ),
         onDateChange: (date) {
           _selectedDate = date;
+          setState(() {
+            formattedDate = DateFormat('M/d/yyyy').format(_selectedDate);
+          });
+          print(formattedDate);
         },
       ),
     );

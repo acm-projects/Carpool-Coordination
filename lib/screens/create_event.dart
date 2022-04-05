@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:secondapp/screens/calendar_screen.dart';
+import 'package:secondapp/screens/current_ride_parent.dart';
+import 'package:secondapp/screens/drive_history.dart';
+import 'package:secondapp/screens/my_profile_screen.dart';
 
 class CreateEvent extends StatefulWidget {
   const CreateEvent({Key? key}) : super(key: key);
@@ -10,17 +14,11 @@ class CreateEvent extends StatefulWidget {
 
 class _CreateEventState extends State<CreateEvent> {
 
-  int _currentIndex = 0;
-  final List<Widget> _children = [];
-
-  void onTappedBar(int index) {
-    setState(() {
-      _currentIndex: index;
-    });
-  }
+  int _index = 0;
 
   @override
   Widget build(BuildContext context) {
+
     final driverName = TextFormField(
       textAlign: TextAlign.center,
       textInputAction: TextInputAction.next,
@@ -163,98 +161,56 @@ class _CreateEventState extends State<CreateEvent> {
           },
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTappedBar,
-        currentIndex: _currentIndex,
-        backgroundColor: Colors.white,
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.people_rounded,
-              color: Color.fromRGBO(33, 36, 52, 1),
-            ),
-            label: 'My Groups',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.calendar_month_rounded,
-              color: Color.fromRGBO(33, 36, 52, 1),
-            ),
-            label: 'Schedule',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_rounded,
-              color: Color.fromRGBO(33, 36, 52, 1),
-            ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.history_rounded,
-              color: Color.fromRGBO(33, 36, 52, 1),
-            ),
-            label: 'history',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_rounded,
-              color: Color.fromRGBO(33, 36, 52, 1),
-            ),
-            label: 'profile',
-          ),
-        ],
-      ),
+
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(30.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                '03/01/22',
-                style: TextStyle(
-                  fontSize: 29,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
+          padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  '03/01/22',
+                  style: TextStyle(
+                    fontSize: 29,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 60,
-              ),
-              driverName,
-              SizedBox(
-                height: 15,
-              ),
-              passengerNames,
-              SizedBox(
-                height: 15,
-              ),
-              pickUpTime,
-              SizedBox(
-                height: 15,
-              ),
-              pickUpAddress,
-              SizedBox(
-                height: 15,
-              ),
-              dropOffAddress,
-              SizedBox(
-                height: 15,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              createEventButton,
-              SizedBox(
-                height: 15,
-              ),
+                SizedBox(
+                  height: 60,
+                ),
+                driverName,
+                SizedBox(
+                  height: 15,
+                ),
+                passengerNames,
+                SizedBox(
+                  height: 15,
+                ),
+                pickUpTime,
+                SizedBox(
+                  height: 15,
+                ),
+                pickUpAddress,
+                SizedBox(
+                  height: 15,
+                ),
+                dropOffAddress,
+                SizedBox(
+                  height: 15,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                createEventButton,
+                SizedBox(
+                  height: 15,
+                ),
 
-            ],
+              ],
+            ),
           ),
         ),
       ),

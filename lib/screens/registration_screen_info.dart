@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:secondapp/model/parent_model.dart';
+import 'package:secondapp/screens/ScreenNavigator.dart';
 import 'create_event.dart';
 import 'drive_history.dart';
-
 
 class RegistrationScreenInfo extends StatefulWidget {
   const RegistrationScreenInfo({Key? key}) : super(key: key);
@@ -11,6 +14,13 @@ class RegistrationScreenInfo extends StatefulWidget {
 }
 
 class _RegistrationScreenInfoState extends State<RegistrationScreenInfo> {
+  final _auth = FirebaseAuth.instance;
+  CollectionReference parents =
+      FirebaseFirestore.instance.collection('parents');
+
+  final modelEditingController = new TextEditingController();
+  final licensePlateEditingController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // Car Model Question
@@ -27,6 +37,10 @@ class _RegistrationScreenInfoState extends State<RegistrationScreenInfo> {
     final carModelField = TextFormField(
       textAlign: TextAlign.center,
       autofocus: false,
+      controller: modelEditingController,
+      onSaved: (value) {
+        modelEditingController.text = value!;
+      },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         fillColor: Color.fromRGBO(239, 242, 249, 1),
@@ -54,7 +68,10 @@ class _RegistrationScreenInfoState extends State<RegistrationScreenInfo> {
     final plateNumField = TextFormField(
       textAlign: TextAlign.center,
       autofocus: false,
-      //controller: firstNameEditingController,
+      controller: licensePlateEditingController,
+      onSaved: (value) {
+        licensePlateEditingController.text = value!;
+      },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         fillColor: Color.fromRGBO(239, 242, 249, 1),
@@ -78,7 +95,8 @@ class _RegistrationScreenInfoState extends State<RegistrationScreenInfo> {
         minWidth: 38,
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => CreateEvent()));
+              context, MaterialPageRoute(builder: (context) => ScreenNavigator()));
+          updateUser();
         },
         child: Text(
           "Complete",
@@ -168,5 +186,21 @@ class _RegistrationScreenInfoState extends State<RegistrationScreenInfo> {
         ),
       ),
     );
+  }
+
+
+  Future<void> updateUser() {
+    User? user = _auth.currentUser;
+    String model = modelEditingController.text;
+    String licensePlateNum = licensePlateEditingController.text;
+
+    return parents
+        .doc(user?.uid)
+        .update({
+          'model': model,
+          'licensePlate': licensePlateNum,
+        })
+        .then((value) => print("User Updated"))
+        .catchError((error) => print("Failed to update user: $error"));
   }
 }
