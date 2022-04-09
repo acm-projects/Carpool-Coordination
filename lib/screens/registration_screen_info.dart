@@ -15,8 +15,8 @@ class RegistrationScreenInfo extends StatefulWidget {
 
 class _RegistrationScreenInfoState extends State<RegistrationScreenInfo> {
   final _auth = FirebaseAuth.instance;
-  CollectionReference parents =
-      FirebaseFirestore.instance.collection('parents');
+  CollectionReference users =
+      FirebaseFirestore.instance.collection('users');
 
   final modelEditingController = new TextEditingController();
   final licensePlateEditingController = new TextEditingController();
@@ -194,7 +194,7 @@ class _RegistrationScreenInfoState extends State<RegistrationScreenInfo> {
     String model = modelEditingController.text;
     String licensePlateNum = licensePlateEditingController.text;
 
-    return parents
+    return users
         .doc(user?.uid)
         .update({
           'model': model,

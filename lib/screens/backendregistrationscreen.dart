@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:secondapp/model/child_model.dart';
 import 'package:secondapp/model/parent_model.dart';
+import 'package:secondapp/model/user_model.dart';
 import 'package:secondapp/screens/ScreenNavigator.dart';
 import 'package:secondapp/screens/backendhomescreen.dart';
 import 'package:secondapp/screens/create_event.dart';
@@ -227,10 +228,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: 38,
         onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => RegistrationScreenInfo()));
           signUp(emailEditingController.text, passwordEditingController.text);
         },
         child: Text(
@@ -391,27 +388,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
 
   void signUp(String email, String password) async {
-    if(parentOrChild == "parents"){
-      if (_formKey.currentState!.validate()) {
-        await _auth
-            .createUserWithEmailAndPassword(email: email, password: password)
-            .then((value) => {postParentToFirestore()})
-            .catchError((e) {
-          Fluttertoast.showToast(msg: e!.message);
-        });
-      }
+    if (_formKey.currentState!.validate()) {
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) => {postParentToFirestore()})
+          .catchError((e) {
+        Fluttertoast.showToast(msg: e!.message);
+      });
     }
-    else if (parentOrChild == "children"){
-      if (_formKey.currentState!.validate()) {
-        await _auth
-            .createUserWithEmailAndPassword(email: email, password: password)
-            .then((value) => {postChildrenToFirestore()})
-            .catchError((e) {
-          Fluttertoast.showToast(msg: e!.message);
-        });
-      }
-    }
-
   }
 
   postParentToFirestore() async {
@@ -421,54 +405,34 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
-    ParentModel parentModel = ParentModel();
+    UserModel userModel = UserModel();
 
     //writing all the values
-    parentModel.email = user!.email;
-    parentModel.uid = user.uid;
-    parentModel.firstName = firstNameEditingController.text;
-    parentModel.secondName = lastNameEditingController.text;
-    parentModel.parentClass = parentOrChild;
+    userModel.email = user!.email;
+    userModel.uid = user.uid;
+    userModel.firstName = firstNameEditingController.text;
+    userModel.secondName = lastNameEditingController.text;
+    userModel.userType = parentOrChild;
 
     //firebase firestore
     await firebaseFirestore
-        .collection("parents")
+        .collection("users")
         .doc(user.uid)
-        .set(parentModel.toMap());
-    Fluttertoast.showToast(msg: "Parent Account created successfully");
+        .set(userModel.toMap());
+    Fluttertoast.showToast(msg: "User Account created successfully");
 
-    Navigator.pushAndRemoveUntil(
-        (context),
-        MaterialPageRoute(builder: (context) => RegistrationScreenInfo()),
-        (route) => false);
-  }
+    if(parentOrChild == 'parents'){
+      Navigator.pushAndRemoveUntil(
+          (context),
+          MaterialPageRoute(builder: (context) => RegistrationScreenInfo()),
+              (route) => false);
+    }
+    else if(parentOrChild == 'children'){
+      Navigator.pushAndRemoveUntil(
+          (context),
+          MaterialPageRoute(builder: (context) => ScreenNavigator()),
+              (route) => false);
+    }
 
-  postChildrenToFirestore() async {
-    //Calling our firestore
-    //Calling our user model
-    //sending these values
-
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    User? user = _auth.currentUser;
-    ChildModel childModel = ChildModel();
-
-    //writing all the values
-    childModel.email = user!.email;
-    childModel.uid = user.uid;
-    childModel.firstName = firstNameEditingController.text;
-    childModel.secondName = lastNameEditingController.text;
-    childModel.childClass = parentOrChild;
-
-    //firebase firestore
-    await firebaseFirestore
-        .collection("children")
-        .doc(user.uid)
-        .set(childModel.toMap());
-    Fluttertoast.showToast(msg: "Child Account created successfully");
-
-    Navigator.pushAndRemoveUntil(
-        (context),
-        MaterialPageRoute(builder: (context) => ScreenNavigator()),
-            (route) => false);
   }
 }

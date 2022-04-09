@@ -1,10 +1,17 @@
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:secondapp/screens/calendar_screen.dart';
 import 'package:secondapp/screens/create_event.dart';
+import 'package:secondapp/screens/current_ride_kid.dart';
 import 'package:secondapp/screens/current_ride_parent.dart';
 import 'package:secondapp/screens/drive_history.dart';
 import 'package:secondapp/screens/my_profile_screen.dart';
+
+import '../model/user_model.dart';
 
 class ScreenNavigator extends StatefulWidget {
   const ScreenNavigator({Key? key}) : super(key: key);
@@ -16,10 +23,9 @@ class ScreenNavigator extends StatefulWidget {
 class _ScreenNavigatorState extends State<ScreenNavigator> {
 
   int _index = 0;
+  Widget child = Container();
 
-  @override
   Widget build(BuildContext context) {
-    Widget child = Container();
 
     switch(_index){
       case 0:

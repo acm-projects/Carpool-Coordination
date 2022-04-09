@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:secondapp/model/parent_model.dart';
+import 'package:secondapp/model/user_model.dart';
 
 class ProfileApp extends StatefulWidget {
   const ProfileApp({Key? key}) : super(key: key);
@@ -17,16 +18,17 @@ class ProfileApp extends StatefulWidget {
 class _ProfileAppState extends State<ProfileApp> {
   final _auth = FirebaseAuth.instance;
   User? user = FirebaseAuth.instance.currentUser;
-  CollectionReference parents =
-  FirebaseFirestore.instance.collection('parents');
-  ParentModel loggedInUser = ParentModel();
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  UserModel loggedInUser = UserModel();
 
   bool editMode = true;
 
   final modelEditingController = new TextEditingController();
   final licensePlateEditingController = new TextEditingController();
 
-  void clearText(){
+  String userType = "";
+
+  void clearText() {
     modelEditingController.clear();
     licensePlateEditingController.clear();
   }
@@ -35,13 +37,22 @@ class _ProfileAppState extends State<ProfileApp> {
   void initState() {
     super.initState();
     FirebaseFirestore.instance
-        .collection("parents")
+        .collection("users")
         .doc(user!.uid)
         .get()
         .then((value) {
-      this.loggedInUser = ParentModel.fromMap(value.data());
+      this.loggedInUser = UserModel.fromMap(value.data());
       setState(() {});
     });
+  }
+
+  String getUserType() {
+    if (loggedInUser.userType == "parents") {
+      userType = "Parent Account";
+    } else if (loggedInUser.userType == "children") {
+      userType = "Child Account";
+    }
+    return userType;
   }
 
   Widget build(BuildContext context) {
@@ -70,6 +81,8 @@ class _ProfileAppState extends State<ProfileApp> {
                         ),
                       ),
                       CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Images.png'),
                         radius: 70.0,
                       ),
                       SizedBox(
@@ -98,7 +111,7 @@ class _ProfileAppState extends State<ProfileApp> {
                         ),
                       ),
                       Text(
-                        "Parent",
+                        getUserType(),
                         style: TextStyle(
                           fontSize: 25.0,
                           color: Colors.white,
@@ -120,81 +133,7 @@ class _ProfileAppState extends State<ProfileApp> {
                 ),
               ),
             ),
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 30.0, horizontal: 16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Car Model:",
-                      style: TextStyle(
-                        color: Color.fromRGBO(51, 54, 82, 1),
-                        fontStyle: FontStyle.normal,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextFormField(
-                      readOnly: editMode,
-                      textAlign: TextAlign.center,
-                      autofocus: false,
-                      obscureText: true,
-                      controller: modelEditingController,
-                      onSaved: (value) {
-                        modelEditingController.text = value!;
-                      },
-                      decoration: InputDecoration(
-                        fillColor: Color.fromRGBO(239, 242, 249, 1),
-                        filled: true,
-                        //prefixIcon: Icon(Icons.key_rounded),
-                        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                        hintText: "${loggedInUser.model}",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Text(
-                      "License Plate:",
-                      style: TextStyle(
-                          color: Color.fromRGBO(51, 54, 82, 1),
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0),
-                    ),
-                    TextFormField(
-                      readOnly: editMode,
-                      textAlign: TextAlign.center,
-                      autofocus: false,
-                      obscureText: true,
-                      controller: licensePlateEditingController,
-                      onSaved: (value) {
-                        licensePlateEditingController .text = value!;
-                      },
-                      decoration: InputDecoration(
-                        fillColor: Color.fromRGBO(239, 242, 249, 1),
-                        filled: true,
-                        //prefixIcon: Icon(Icons.key_rounded),
-                        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                        hintText: "${loggedInUser.licensePlate}",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            _profileTabs(),
             SizedBox(
               height: 15.0,
             ),
@@ -229,7 +168,7 @@ class _ProfileAppState extends State<ProfileApp> {
                           BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
                       alignment: Alignment.center,
                       child: Text(
-                        editMode ? 'Edit':'Confirm',
+                        editMode ? 'Edit' : 'Confirm',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 25.0,
@@ -244,29 +183,179 @@ class _ProfileAppState extends State<ProfileApp> {
     );
   }
 
-  Future<void> updateUser(){
+  _profileTabs() {
+    if (loggedInUser.userType == "parents") {
+      return Container(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Car Model:",
+                style: TextStyle(
+                  color: Color.fromRGBO(51, 54, 82, 1),
+                  fontStyle: FontStyle.normal,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              TextFormField(
+                readOnly: editMode,
+                textAlign: TextAlign.center,
+                autofocus: false,
+                obscureText: false,
+                controller: modelEditingController,
+                onSaved: (value) {
+                  modelEditingController.text = value!;
+                },
+                decoration: InputDecoration(
+                  fillColor: Color.fromRGBO(239, 242, 249, 1),
+                  filled: true,
+                  //prefixIcon: Icon(Icons.key_rounded),
+                  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                  hintText: "${loggedInUser.model}",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Text(
+                "License Plate:",
+                style: TextStyle(
+                    color: Color.fromRGBO(51, 54, 82, 1),
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0),
+              ),
+              TextFormField(
+                readOnly: editMode,
+                textAlign: TextAlign.center,
+                autofocus: false,
+                obscureText: false,
+                controller: licensePlateEditingController,
+                onSaved: (value) {
+                  licensePlateEditingController.text = value!;
+                },
+                decoration: InputDecoration(
+                  fillColor: Color.fromRGBO(239, 242, 249, 1),
+                  filled: true,
+                  //prefixIcon: Icon(Icons.key_rounded),
+                  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                  hintText: "${loggedInUser.licensePlate}",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+            ],
+          ),
+        ),
+      );
+    } else {
+      return Container(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Email:",
+                style: TextStyle(
+                  color: Color.fromRGBO(51, 54, 82, 1),
+                  fontStyle: FontStyle.normal,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              TextFormField(
+                readOnly: true,
+                textAlign: TextAlign.center,
+                autofocus: false,
+                obscureText: false,
+                decoration: InputDecoration(
+                  fillColor: Color.fromRGBO(239, 242, 249, 1),
+                  filled: true,
+                  //prefixIcon: Icon(Icons.key_rounded),
+                  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                  hintText: "${loggedInUser.email}",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Text(
+                "Phone Number:",
+                style: TextStyle(
+                    color: Color.fromRGBO(51, 54, 82, 1),
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0),
+              ),
+              TextFormField(
+                readOnly: editMode,
+                textAlign: TextAlign.center,
+                autofocus: false,
+                obscureText: false,
+                controller: licensePlateEditingController,
+                onSaved: (value) {
+                  licensePlateEditingController.text = value!;
+                },
+                decoration: InputDecoration(
+                  fillColor: Color.fromRGBO(239, 242, 249, 1),
+                  filled: true,
+                  //prefixIcon: Icon(Icons.key_rounded),
+                  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                  hintText: "${loggedInUser.licensePlate}",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+  }
+
+  Future<void> updateUser() {
     User? user = _auth.currentUser;
     String model = modelEditingController.text;
     String licensePlateNum = licensePlateEditingController.text;
 
-    return parents
+    return users
         .doc(user?.uid)
         .update({
-      'model': model,
-      'licensePlate': licensePlateNum,
-    })
+          'model': model,
+          'licensePlate': licensePlateNum,
+        })
         .then((value) => print("User Updated"))
         .catchError((error) => print("Failed to update user: $error"));
   }
-  void updateModel(){
+
+  void updateModel() {
     FirebaseFirestore.instance
-        .collection("parents")
+        .collection("users")
         .doc(user!.uid)
         .get()
         .then((value) {
-      this.loggedInUser = ParentModel.fromMap(value.data());
+      this.loggedInUser = UserModel.fromMap(value.data());
       setState(() {});
     });
   }
-
 }
