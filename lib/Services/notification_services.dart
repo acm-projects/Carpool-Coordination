@@ -34,7 +34,7 @@ class NotifyHelper {
     await flutterLocalNotificationsPlugin.zonedSchedule(
         0,
         'Settings Changed',
-        'Theme Changed 5 Seconds Ago',
+        'Theme Changed 10 Seconds Ago',
         tz.TZDateTime.now(tz.local).add(const Duration(seconds: 10)),
         const NotificationDetails(
             android: AndroidNotificationDetails(

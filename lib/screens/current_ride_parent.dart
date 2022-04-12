@@ -24,8 +24,11 @@ class CRParent extends StatefulWidget {
 class _CRParentState extends State<CRParent> {
 
   DateTime _selectedDate = DateTime.now();
+
   String formattedDate = DateFormat('M/d/yyyy').format(DateTime.now());
+  String formattedTime = DateFormat('hh:mm').format(DateTime.now());
   var notifyHelper;
+
 
 
   final _auth = FirebaseAuth.instance;
@@ -175,6 +178,7 @@ class _CRParentState extends State<CRParent> {
               shrinkWrap: true,
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
                 Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+
                 if(data['date'] == formattedDate){
                   return ExpansionTile( // the expandy thing
                       tilePadding: const EdgeInsets.only(

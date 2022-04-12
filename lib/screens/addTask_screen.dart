@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
+import 'package:secondapp/Services/LocalNotifyManager.dart';
 import 'package:secondapp/Services/theme_services.dart';
 import 'package:secondapp/model/ride.dart';
 import 'package:secondapp/screens/ScreenNavigator.dart';
@@ -33,6 +34,8 @@ class _AddRidePageState extends State<AddRidePage> {
   String _endTime = "9:30 PM";
   String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
   int _selectedRemind = 15;
+  int h = 0;
+  int m = 0;
   List<int> remindList = [
     30,
     45,
@@ -184,7 +187,14 @@ class _AddRidePageState extends State<AddRidePage> {
                 children: [
                   _colorPallete(),
                   MyButton(
-                      label: "Schedule Ride", onTap: () => _validateDate()),
+                      label: "Schedule Ride", onTap: () async {
+                        _validateDate();
+                        h = int.parse(_startTime.split(":")[0]) + 12;
+                        m = int.parse(_startTime.split(":")[1].split(" ")[0]);
+                        print(h);
+                        print(m);
+                        await localNotifyManager.showDailyAtTimeNotification(h, m,_parentController.text, _selectedRemind);
+                  }),
                 ],
               ),
             ],
