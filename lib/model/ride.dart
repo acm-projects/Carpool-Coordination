@@ -2,6 +2,7 @@ class rideModel{
   String? uid;
   String? parent;
   String? carpooler;
+  String? origin;
   String? destination;
   String? date;
   String? startTime;
@@ -10,13 +11,14 @@ class rideModel{
   int? remind;
   String? repeat;
 
-  rideModel({this.uid,this.parent,this.carpooler,this.destination,this.date,this.startTime,this.endTime,this.color,this.remind,this.repeat});
+  rideModel({this.uid,this.parent,this.carpooler, this.origin, this.destination,this.date,this.startTime,this.endTime,this.color,this.remind,this.repeat});
 
   factory rideModel.fromMap(map){
     return rideModel(
       uid: map['uid'],
       parent: map['parent'],
       carpooler: map['carpooler'],
+      origin: map['origin'],
       destination: map['destination'],
       date: map['date'],
       startTime: map['startTime'],
@@ -32,6 +34,7 @@ class rideModel{
       'uid' : uid,
       'parent' : parent,
       'carpooler': carpooler,
+      'origin': origin,
       'destination' : destination,
       'date' : date,
       'startTime' : startTime,

@@ -25,6 +25,7 @@ class _ProfileAppState extends State<ProfileApp> {
 
   final modelEditingController = new TextEditingController();
   final licensePlateEditingController = new TextEditingController();
+  final addressEditingController = new TextEditingController();
 
   String userType = "";
 
@@ -113,9 +114,9 @@ class _ProfileAppState extends State<ProfileApp> {
                       Text(
                         getUserType(),
                         style: TextStyle(
-                          fontSize: 25.0,
+                          fontSize: 20.0,
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                       SizedBox(
@@ -255,6 +256,37 @@ class _ProfileAppState extends State<ProfileApp> {
               SizedBox(
                 height: 10.0,
               ),
+              Text(
+                "Address: ",
+                style: TextStyle(
+                    color: Color.fromRGBO(51, 54, 82, 1),
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0),
+              ),
+              TextFormField(
+                readOnly: editMode,
+                textAlign: TextAlign.center,
+                autofocus: false,
+                obscureText: false,
+                controller: addressEditingController,
+                onSaved: (value) {
+                  addressEditingController.text = value!;
+                },
+                decoration: InputDecoration(
+                  fillColor: Color.fromRGBO(239, 242, 249, 1),
+                  filled: true,
+                  //prefixIcon: Icon(Icons.key_rounded),
+                  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                  hintText: "${loggedInUser.address}",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
             ],
           ),
         ),
@@ -318,6 +350,37 @@ class _ProfileAppState extends State<ProfileApp> {
                   //prefixIcon: Icon(Icons.key_rounded),
                   contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
                   hintText: "${loggedInUser.licensePlate}",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                "Address: ",
+                style: TextStyle(
+                    color: Color.fromRGBO(51, 54, 82, 1),
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0),
+              ),
+              TextFormField(
+                readOnly: editMode,
+                textAlign: TextAlign.center,
+                autofocus: false,
+                obscureText: false,
+                controller: addressEditingController,
+                onSaved: (value) {
+                  addressEditingController.text = value!;
+                },
+                decoration: InputDecoration(
+                  fillColor: Color.fromRGBO(239, 242, 249, 1),
+                  filled: true,
+                  //prefixIcon: Icon(Icons.key_rounded),
+                  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                  hintText: "${loggedInUser.address}",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),

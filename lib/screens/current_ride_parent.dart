@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:secondapp/globalvariable.dart';
 import 'package:secondapp/model/ride.dart';
 import 'package:secondapp/screens/map_screen.dart';
 import 'package:secondapp/screens/theme.dart';
@@ -29,7 +30,7 @@ class _CRParentState extends State<CRParent> {
   String formattedTime = DateFormat('hh:mm').format(DateTime.now());
   var notifyHelper;
 
-
+  MyService _myService = MyService();
 
   final _auth = FirebaseAuth.instance;
   User? user = FirebaseAuth.instance.currentUser;
@@ -225,6 +226,12 @@ class _CRParentState extends State<CRParent> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   ElevatedButton(onPressed: () {
+                                    _myService.destinationAddress = data['destination'];
+                                    _myService.OriginAddress = data['origin'];
+
+                                    print(_myService.OriginAddress);
+                                    print(_myService.destinationAddress);
+
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) => MapScreen()));
                                   },

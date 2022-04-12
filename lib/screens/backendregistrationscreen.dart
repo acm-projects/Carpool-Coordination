@@ -30,6 +30,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final emailEditingController = new TextEditingController();
   final passwordEditingController = new TextEditingController();
   final confirmPasswordEditingController = new TextEditingController();
+  final addressEditingController = new TextEditingController();
 
   String parentOrChild = "";
 
@@ -68,6 +69,37 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         //prefixIcon: Icon(Icons.account_circle),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Name",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+
+    final addressField = TextFormField(
+      textAlign: TextAlign.center,
+      autofocus: false,
+      controller: addressEditingController,
+      keyboardType: TextInputType.streetAddress,
+      validator: (value) {
+        RegExp regex = new RegExp(r'^.{1,}$');
+        if (value!.isEmpty) {
+          return ("Address Cannot Be Empty");
+        }
+        if (!regex.hasMatch(value)) {
+          return ("Please Enter Valid Address");
+        }
+        return null;
+      },
+      onSaved: (value) {
+        addressEditingController.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        filled: true,
+        //prefixIcon: Icon(Icons.account_circle),
+        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "Street Address",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -299,6 +331,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     SizedBox(
                       height: 15,
                     ),
+                    addressField,
+                    SizedBox(
+                      height: 15,
+                    ),
                     passwordField,
                     SizedBox(
                       height: 15,
@@ -413,6 +449,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     userModel.firstName = firstNameEditingController.text;
     userModel.secondName = lastNameEditingController.text;
     userModel.userType = parentOrChild;
+    userModel.address = addressEditingController.text;
 
     //firebase firestore
     await firebaseFirestore

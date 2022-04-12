@@ -13,7 +13,10 @@ import 'package:secondapp/screens/ScreenNavigator.dart';
 import 'package:secondapp/screens/calendar_screen.dart';
 import 'package:secondapp/screens/theme.dart';
 import 'package:secondapp/ui/widgets/button.dart';
+import '../globalvariable.dart';
+import '../model/user_model.dart';
 import '../ui/widgets/input_field.dart';
+
 
 
 class AddRidePage extends StatefulWidget {
@@ -24,7 +27,13 @@ class AddRidePage extends StatefulWidget {
 }
 
 class _AddRidePageState extends State<AddRidePage> {
-  final _auth = FirebaseAuth.instance;
+
+  User? user = FirebaseAuth.instance.currentUser;
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  UserModel loggedInUser = UserModel();
+
+  MyService _myService = MyService();
+
   final TextEditingController _parentController = TextEditingController();
   final TextEditingController _carpoolerEdititngController =
       TextEditingController();
@@ -44,6 +53,19 @@ class _AddRidePageState extends State<AddRidePage> {
   int _selectedColor = 0;
   String _selectedRepeat = "None";
   List<String> repeatList = ["Daily", "Weekly", "Monthly"];
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      this.loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -337,12 +359,14 @@ class _AddRidePageState extends State<AddRidePage> {
     //sending these values
 
     CollectionReference rides = FirebaseFirestore.instance.collection('rides');
+
     rideModel ridemodel = rideModel();
 
     //writing all the values
-    ridemodel.uid = "Nn0dpcAZ9RMI2yqIyyfe";
+    ridemodel.uid = rides.id;
     ridemodel.parent = _parentController.text;
     ridemodel.carpooler = _carpoolerEdititngController.text;
+    ridemodel.origin = loggedInUser.address;
     ridemodel.destination = _addressEdititngController.text;
     ridemodel.date = DateFormat.yMd().format(_selectedDate);
     ridemodel.startTime = _startTime;
@@ -350,6 +374,9 @@ class _AddRidePageState extends State<AddRidePage> {
     ridemodel.color = _selectedColor;
     ridemodel.remind = _selectedRemind;
     ridemodel.repeat = _selectedRepeat;
+
+
+
     /*'uid' : uid,
     'parent' : parent,
     'carpooler': carpooler,
