@@ -1,11 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:secondapp/model/child_model.dart';
+import 'package:secondapp/model/parent_model.dart';
 import 'package:secondapp/model/user_model.dart';
+import 'package:secondapp/screens/ScreenNavigator.dart';
 import 'package:secondapp/screens/backendhomescreen.dart';
+import 'package:secondapp/screens/create_event.dart';
 
 import 'package:secondapp/screens/registration_screen_info.dart';
+import 'package:secondapp/screens/theme.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -27,6 +33,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final passwordEditingController = new TextEditingController();
   final confirmPasswordEditingController = new TextEditingController();
 
+  String parentOrChild = "";
+
   @override
   Widget build(BuildContext context) {
     bool parentPressed = false;
@@ -34,7 +42,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     bool pressAttention1 = false;
     bool pressAttention2 = false;
 
-    Color _buttonColor1 = Color.fromRGBO(144, 173, 198, 1);
+    Color _buttonColor1 = primaryClr; //Color.fromRGBO(144, 173, 198, 1);
     Color _buttonColor2 = Colors.green;
     //first name field
     final firstNameField = TextFormField(
@@ -57,13 +65,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        fillColor: Colors.white, //Color.fromRGBO(239, 242, 249, 1),
         filled: true,
         //prefixIcon: Icon(Icons.account_circle),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Name",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
     );
@@ -72,7 +80,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       preferredSize: Size.fromHeight(45),
       child: AppBar(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(20),
         ),
         title: Text(
           'Carpool Coordination',
@@ -102,7 +110,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       validator: (value) {
         RegExp regex = new RegExp(r'^.{1,}$');
         if (value!.isEmpty) {
-          return ("Second Name Cannot Be Empty");
+          return ("Last Name Cannot Be Empty");
         }
         if (!regex.hasMatch(value)) {
           return ("Please Enter Valid name (Min. 1 Characters)");
@@ -113,13 +121,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        fillColor: Colors.white, //Color.fromRGBO(239, 242, 249, 1),
         filled: true,
         //prefixIcon: Icon(Icons.account_circle),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Last Name",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
     );
@@ -144,13 +152,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        fillColor: Colors.white, //Color.fromRGBO(239, 242, 249, 1),
         filled: true,
         //prefixIcon: Icon(Icons.mail_outline_rounded),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Email",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
     );
@@ -174,13 +182,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        fillColor: Colors.white, //Color.fromRGBO(239, 242, 249, 1),
         filled: true,
         //prefixIcon: Icon(Icons.key_rounded),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Password",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
     );
@@ -202,13 +210,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        fillColor: Colors.white, //Color.fromRGBO(239, 242, 249, 1),
         filled: true,
         //prefixIcon: Icon(Icons.key_rounded),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Confirm Password",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
     );
@@ -216,16 +224,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     //signup button
     final signUpButton = Material(
       elevation: 2,
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(20),
       color: Color.fromRGBO(51, 54, 82, 1),
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: 38,
         onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => RegistrationScreenInfo()));
           signUp(emailEditingController.text, passwordEditingController.text);
         },
         child: Text(
@@ -238,8 +242,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+      backgroundColor: Color.fromRGBO(245, 244, 249, 1),
+      /*appBar: AppBar(
         backgroundColor: Color.fromRGBO(51, 54, 82, 1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -262,9 +266,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             Navigator.of(context).pop();
           },
         ),
-      ),
+      ),*/
       body: Center(
         child: SingleChildScrollView(
+          padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
           child: Container(
             color: Colors.white,
             child: Padding(
@@ -323,9 +328,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       ? _buttonColor2
                                       : _buttonColor1,
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  onPressed: () => setState(
-                                      () => pressAttention1 = !pressAttention1),
+                                      borderRadius: BorderRadius.circular(20)),
+                                  onPressed: () {
+                                    setState(() {
+                                      parentOrChild = "parents";
+                                    });
+                                  },
                                   child: Text(
                                     'Parent',
                                     style: TextStyle(
@@ -351,13 +359,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
+                                      borderRadius: BorderRadius.circular(20)),
                                   color: _buttonColor1,
-                                  onPressed: () => setState(
-                                    () {
-                                      _buttonColor1 = Colors.green;
-                                    },
-                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      parentOrChild = "children";
+                                    });
+                                  },
                                 ),
                               ),
                             ),
@@ -386,14 +394,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     if (_formKey.currentState!.validate()) {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) => {postDetailsToFirestore()})
+          .then((value) => {postParentToFirestore()})
           .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
       });
     }
   }
 
-  postDetailsToFirestore() async {
+  postParentToFirestore() async {
     //Calling our firestore
     //Calling our user model
     //sending these values
@@ -407,17 +415,27 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     userModel.uid = user.uid;
     userModel.firstName = firstNameEditingController.text;
     userModel.secondName = lastNameEditingController.text;
+    userModel.userType = parentOrChild;
 
     //firebase firestore
     await firebaseFirestore
         .collection("users")
         .doc(user.uid)
         .set(userModel.toMap());
-    Fluttertoast.showToast(msg: "Account created successfully");
+    Fluttertoast.showToast(msg: "User Account created successfully");
 
-    Navigator.pushAndRemoveUntil(
-        (context),
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-        (route) => false);
+    if(parentOrChild == 'parents'){
+      Navigator.pushAndRemoveUntil(
+          (context),
+          MaterialPageRoute(builder: (context) => RegistrationScreenInfo()),
+              (route) => false);
+    }
+    else if(parentOrChild == 'children'){
+      Navigator.pushAndRemoveUntil(
+          (context),
+          MaterialPageRoute(builder: (context) => ScreenNavigator()),
+              (route) => false);
+    }
+
   }
 }

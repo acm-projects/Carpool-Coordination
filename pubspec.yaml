@@ -36,6 +36,9 @@ dependencies:
   google_fonts:
   date_picker_timeline:
   flutter_staggered_animations:
+  google_maps_flutter: ^2.1.3
+  geolocator: ^8.2.0
+  http: ^0.13.4
 
 
 

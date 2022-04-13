@@ -8,6 +8,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 import 'package:secondapp/Services/theme_services.dart';
 import 'package:secondapp/model/ride.dart';
+import 'package:secondapp/screens/ScreenNavigator.dart';
 import 'package:secondapp/screens/calendar_screen.dart';
 import 'package:secondapp/screens/theme.dart';
 import 'package:secondapp/ui/widgets/button.dart';
@@ -361,7 +362,7 @@ class _AddRidePageState extends State<AddRidePage> {
 
     Navigator.pushAndRemoveUntil(
         (context),
-        MaterialPageRoute(builder: (context) => CalendarScreen()),
+        MaterialPageRoute(builder: (context) => ScreenNavigator()),
         (route) => false);
   }
 }

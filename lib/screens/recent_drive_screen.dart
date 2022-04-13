@@ -44,7 +44,7 @@ class _RecentDriveState extends State<RecentDrive> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home_rounded,
+              Icons.directions_car_rounded,
               color: Color.fromRGBO(33, 36, 52, 1),
             ),
             label: 'Home',

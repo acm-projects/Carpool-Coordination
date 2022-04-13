@@ -1,30 +1,26 @@
+/*
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class UserModel {
+class ChaildModel {
   String? uid;
   String? email;
   String? firstName;
   String? secondName;
-  String? userType;
-  String? model;
-  String? licensePlate;
+  String? childClass;
 
 
-
-  UserModel({this.uid, this.email, this.firstName, this.secondName, this.userType, this.model, this.licensePlate});
+  ChildModel({this.uid, this.email, this.firstName, this.secondName, this.childClass});
 
   //retrieve data from server
 
-  factory UserModel.fromMap(map) {
-    return UserModel(
+  factory ChildModel.fromMap(map) {
+    return ChildModel(
       uid: map['uid'],
       email: map['email'],
       firstName: map['firstName'],
       secondName: map['secondName'],
-      userType: map['userType'],
-      model: map['model'],
-      licensePlate: map['licensePlate'],
+      childClass: map['childClass'],
     );
   }
 
@@ -35,9 +31,9 @@ class UserModel {
       'email': email,
       'firstName': firstName,
       'secondName': secondName,
-      'userType': userType,
-      'model': model,
-      'licensePlate': licensePlate,
+      'childClass': childClass,
+
     };
   }
 }
+*/
