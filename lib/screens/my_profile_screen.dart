@@ -5,8 +5,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:secondapp/model/parent_model.dart';
 import 'package:secondapp/model/user_model.dart';
+import 'package:secondapp/screens/theme.dart';
 
 class ProfileApp extends StatefulWidget {
   const ProfileApp({Key? key}) : super(key: key);
@@ -58,12 +60,13 @@ class _ProfileAppState extends State<ProfileApp> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(245, 244, 249, 1),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Color.fromRGBO(51, 54, 82, 1),
+                color:  Color.fromRGBO(239, 240, 254, 1),
                 borderRadius: BorderRadius.circular(15),
               ),
               child: Container(
@@ -98,33 +101,47 @@ class _ProfileAppState extends State<ProfileApp> {
                       ),
                       Text(
                         "${loggedInUser.firstName} ${loggedInUser.secondName}",
-                        style: TextStyle(
+                        style:  GoogleFonts.lato(
+                         // TextStyle(
                           fontSize: 30.0,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold,
+                      //  ),
                         ),
                       ),
                       Text(
                         " ",
                         style: TextStyle(
                           fontSize: 5.0,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                       Text(
                         getUserType(),
                         style: TextStyle(
                           fontSize: 20.0,
+
+                        style:  GoogleFonts.lato(
+                          // TextStyle(
+                          fontSize: 25.0,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          //  ),
+                        ),
+
+                        /*style: TextStyle(
+                          fontSize: 25.0,
                           color: Colors.white,
                           fontWeight: FontWeight.normal,
                         ),
+                          fontWeight: FontWeight.bold,
+                        ),*/
                       ),
                       SizedBox(
                         height: 10.0,
                       ),
                       Card(
-                        margin: EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 5.0),
+                        margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
                         clipBehavior: Clip.antiAlias,
                         color: Colors.white,
                         elevation: 5.0,
@@ -151,7 +168,7 @@ class _ProfileAppState extends State<ProfileApp> {
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(80.0)),
-                  elevation: 5.0,
+                  //elevation: 5.0,
                   padding: EdgeInsets.all(0.0),
                   child: Ink(
                     decoration: BoxDecoration(
@@ -159,8 +176,10 @@ class _ProfileAppState extends State<ProfileApp> {
                           begin: Alignment.centerRight,
                           end: Alignment.centerLeft,
                           colors: [
-                            Color.fromRGBO(144, 173, 198, 1),
-                            Color.fromRGBO(144, 173, 198, 1)
+                            primaryClr,
+                           primaryClr,
+                           // Color.fromRGBO(144, 173, 198, 1),
+                           // Color.fromRGBO(144, 173, 198, 1)
                           ]),
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -170,10 +189,19 @@ class _ProfileAppState extends State<ProfileApp> {
                       alignment: Alignment.center,
                       child: Text(
                         editMode ? 'Edit' : 'Confirm',
-                        style: TextStyle(
+
+                        style:  GoogleFonts.lato(
+                          // TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          //  ),
+                        ),
+
+                        /*style: TextStyle(
                             color: Colors.white,
                             fontSize: 25.0,
-                            fontWeight: FontWeight.bold),
+                            fontWeight: FontWeight.bold),*/
                       ),
                     ),
                   )),
@@ -188,19 +216,22 @@ class _ProfileAppState extends State<ProfileApp> {
     if (loggedInUser.userType == "parents") {
       return Container(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 16.0),
+          padding: const EdgeInsets.only(top: 10.0, bottom: 20.0, left: 16.0, right: 16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Car Model:",
-                style: TextStyle(
-                  color: Color.fromRGBO(51, 54, 82, 1),
-                  fontStyle: FontStyle.normal,
+                "Car Model: ",
+
+                style:  GoogleFonts.lato(
+                  // TextStyle(
                   fontSize: 20.0,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
+                  //  ),
                 ),
+
               ),
               TextFormField(
                 readOnly: editMode,
@@ -227,11 +258,19 @@ class _ProfileAppState extends State<ProfileApp> {
               ),
               Text(
                 "License Plate:",
-                style: TextStyle(
+
+                style:  GoogleFonts.lato(
+                  // TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  //  ),
+                ),
+                /*style: TextStyle(
                     color: Color.fromRGBO(51, 54, 82, 1),
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.bold,
-                    fontSize: 20.0),
+                    fontSize: 20.0),*/
               ),
               TextFormField(
                 readOnly: editMode,

@@ -4,6 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:secondapp/screens/theme.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:secondapp/screens/theme.dart';
+
+import '../Services/theme_services.dart';
 
 class DriveHistory extends StatefulWidget {
   const DriveHistory({Key? key}) : super(key: key);
@@ -14,6 +20,8 @@ class DriveHistory extends StatefulWidget {
 
 class _DriveHistoryState extends State<DriveHistory> {
   String formattedDate = DateFormat('M/d/yyyy').format(DateTime.now());
+
+  get notifyHelper => null; //lmao this like doesnt work
 
   @override
   Widget build(BuildContext context) {
@@ -84,41 +92,163 @@ class _DriveHistoryState extends State<DriveHistory> {
                     borderRadius: BorderRadius.circular(16),
                     color: primaryClr,
                   ),
-                  child: Row(children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "${data['date']}                 ",
-                                style: GoogleFonts.lato(
-                                  textStyle: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                              ),
-                              Icon(
-                                Icons.access_time_rounded,
-                                color: Colors.grey[200],
-                                size: 18,
-                              ),
-                              SizedBox(width: 4),
-                              Text(
-                                "${data['startTime']} - ${data['endTime']}",
-                                style: GoogleFonts.lato(
-                                  textStyle:
-                                  TextStyle(fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.grey[100]),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 10),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: Column(
+                children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      Container(
+                        alignment: const Alignment(-1, 1),
+                        margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                        child: Text("  03/29/22",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0)),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Driver: Spongebob",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0)),
+                          Text(
+                              "                         Departure Time: ",
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0)),
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Passengers: Aaron Arkansas,",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0)),
+                          Text("                    06:20 PM   ",
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0)),
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Farhan MyTiresGone,",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0)),
+                          Text(
+                              "                       Arrival Time:",
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0)),
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0)),
+                          Text(
+                              "                                                                                06:40 PM",
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0)),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 10),
+            /*Container(
+              height: 150,
+              decoration: BoxDecoration(
+                  color: Color.fromRGBO(144, 173, 198, 1),
+                  border: Border.all(
+                    color: Color.fromRGBO(144, 173, 198, 1),
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: Column(
+                children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      Container(
+                        alignment: const Alignment(-1, 1),
+                        margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                        child: Text("  03/28/22",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0)),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Driver: Spongebob",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0)),
+                          Text(
+                              "                                       Departure Time: ",
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0)),
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Passengers: Aaron Arkansas,",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0)),
+                          Text("                             06:20 PM   ",
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0)),
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Farhan MyTiresGone,",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0)),
                           Text(
                             "Parent: ${data['parent']}              Carpoolers: ${data['carpooler']}",
                             style: GoogleFonts.lato(
@@ -166,5 +296,39 @@ class _DriveHistoryState extends State<DriveHistory> {
           );
           });
   }
+  _appBar() {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Color.fromRGBO(245, 244, 249, 1), //context.theme.backgroundColor,
+      leading: GestureDetector(
+        onTap: () {
+          ThemeServices().switchTheme();
+          notifyHelper.displayNotification(
+            title: "Theme Changed",
+            body: Get.isDarkMode
+                ? "Activated Light Theme"
+                : "Activated Dark Theme",
+          );
+
+          notifyHelper.scheduledNotification();
+        },
+        child: Icon(
+            Get.isDarkMode ? Icons.wb_sunny_outlined : Icons.nightlight_round,
+            size: 20,
+            color: Get.isDarkMode ? Colors.white : Colors.black
+        ),
+
+      ),
+      actions: [
+        CircleAvatar(
+          backgroundImage: AssetImage("Stray-Kids-Logo.png"),
+        ),
+        SizedBox(
+          width: 20,
+        ),
+      ],
+    );
+  }
 }
+
 class DriveHistoryList {}
