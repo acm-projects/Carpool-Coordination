@@ -2,8 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:secondapp/screens/CalendarOneScreen.dart';
+import 'package:secondapp/screens/backendhomescreen.dart';
 import 'package:secondapp/screens/calendar_screen.dart';
 import 'package:secondapp/screens/backendloginscreen.dart';
+import 'package:secondapp/screens/drive_history.dart';
 import 'package:secondapp/screens/theme.dart';
 
 import 'Services/theme_services.dart';
@@ -38,5 +40,22 @@ class MyApp extends StatelessWidget {
 //test
 
     );
+  }
+}
+
+class TestRouting extends StatefulWidget {
+  const TestRouting({Key? key}) : super(key: key);
+
+  @override
+  State<TestRouting> createState() => _TestRoutingState();
+}
+
+class _TestRoutingState extends State<TestRouting> {
+
+  PageController pageController=PageController();
+  List<Widget>pages=[CalendarScreen(),ProfileApp(),CRParent(),CRKid(),DriveHistory()];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold();
   }
 }

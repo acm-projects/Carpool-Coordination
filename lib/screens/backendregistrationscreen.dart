@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -10,6 +11,7 @@ import 'package:secondapp/screens/backendhomescreen.dart';
 import 'package:secondapp/screens/create_event.dart';
 
 import 'package:secondapp/screens/registration_screen_info.dart';
+import 'package:secondapp/screens/theme.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -40,7 +42,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     bool pressAttention1 = false;
     bool pressAttention2 = false;
 
-    Color _buttonColor1 = Color.fromRGBO(144, 173, 198, 1);
+    Color _buttonColor1 = primaryClr; //Color.fromRGBO(144, 173, 198, 1);
     Color _buttonColor2 = Colors.green;
     //first name field
     final firstNameField = TextFormField(
@@ -63,13 +65,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        fillColor: Colors.white, //Color.fromRGBO(239, 242, 249, 1),
         filled: true,
         //prefixIcon: Icon(Icons.account_circle),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Name",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
     );
@@ -78,7 +80,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       preferredSize: Size.fromHeight(45),
       child: AppBar(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(20),
         ),
         title: Text(
           'Carpool Coordination',
@@ -119,13 +121,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        fillColor: Colors.white, //Color.fromRGBO(239, 242, 249, 1),
         filled: true,
         //prefixIcon: Icon(Icons.account_circle),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Last Name",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
     );
@@ -150,13 +152,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        fillColor: Colors.white, //Color.fromRGBO(239, 242, 249, 1),
         filled: true,
         //prefixIcon: Icon(Icons.mail_outline_rounded),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Email",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
     );
@@ -180,13 +182,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        fillColor: Colors.white, //Color.fromRGBO(239, 242, 249, 1),
         filled: true,
         //prefixIcon: Icon(Icons.key_rounded),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Password",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
     );
@@ -208,13 +210,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        fillColor: Colors.white, //Color.fromRGBO(239, 242, 249, 1),
         filled: true,
         //prefixIcon: Icon(Icons.key_rounded),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Confirm Password",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
     );
@@ -222,7 +224,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     //signup button
     final signUpButton = Material(
       elevation: 2,
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(20),
       color: Color.fromRGBO(51, 54, 82, 1),
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -240,8 +242,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+      backgroundColor: Color.fromRGBO(245, 244, 249, 1),
+      /*appBar: AppBar(
         backgroundColor: Color.fromRGBO(51, 54, 82, 1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -264,9 +266,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             Navigator.of(context).pop();
           },
         ),
-      ),
+      ),*/
       body: Center(
         child: SingleChildScrollView(
+          padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
           child: Container(
             color: Colors.white,
             child: Padding(
@@ -325,7 +328,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       ? _buttonColor2
                                       : _buttonColor1,
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
+                                      borderRadius: BorderRadius.circular(20)),
                                   onPressed: () {
                                     setState(() {
                                       parentOrChild = "parents";
@@ -356,7 +359,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
+                                      borderRadius: BorderRadius.circular(20)),
                                   color: _buttonColor1,
                                   onPressed: () {
                                     setState(() {

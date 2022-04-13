@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:secondapp/screens/ScreenNavigator.dart';
 import 'package:secondapp/screens/calendar_screen.dart';
 import 'package:secondapp/screens/backendhomescreen.dart';
 import 'package:secondapp/screens/backendregistrationscreen.dart';
+import 'package:secondapp/screens/theme.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -49,11 +51,11 @@ class _LoginScreenState extends State<LoginScreen> {
       decoration: InputDecoration(
         //prefixIcon: Icon(Icons.mail_outline_rounded),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        fillColor: Colors.white,//Color.fromRGBO(239, 242, 249, 1),
         filled: true,
         hintText: "Email",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
     );
@@ -79,19 +81,19 @@ class _LoginScreenState extends State<LoginScreen> {
       decoration: InputDecoration(
         //prefixIcon: Icon(Icons.key_rounded),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        fillColor: Colors.white, //Color.fromRGBO(239, 242, 249, 1),
         filled: true,
         hintText: "Password",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
     );
 
     final loginButton = Material(
-      elevation: 2,
-      borderRadius: BorderRadius.circular(15),
-      color: Color.fromRGBO(144, 173, 198, 1),
+     // elevation: 2,
+      borderRadius: BorderRadius.circular(20),
+      color: Color.fromRGBO(51, 54, 82, 1),//primaryClr, //Color.fromRGBO(144, 173, 198, 1),
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: 225,
@@ -103,15 +105,21 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Text(
           "Login",
           textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+          style: GoogleFonts.lato(
+            textStyle: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 20),
+      ),
         ),
       ),
     );
 
-    final appBar = PreferredSize(
+    final appBar = Text("Carpool Coordination");
+    /*PreferredSize(
       preferredSize: Size.fromHeight(45),
-      child: AppBar(
+      child:
+      AppBar(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
         ),
@@ -124,13 +132,13 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
-    );
+    );*/
 
     //Sign up button
     final signUpButton = Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(10),
-      color: Color.fromRGBO(51, 54, 82, 1),
+      //elevation: 5,
+      borderRadius: BorderRadius.circular(20),
+      color: primaryClr,//Color.fromRGBO(51, 54, 82, 1),
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: 500,
@@ -142,8 +150,12 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Text(
           "Sign Up",
           textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+          style: GoogleFonts.lato(
+            textStyle: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20),
+          ),
         ),
       ),
     );
@@ -157,8 +169,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+      backgroundColor: Color.fromRGBO(245, 244, 249, 1),
+      /*appBar: AppBar(
         backgroundColor: Color.fromRGBO(51, 54, 82, 1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -173,8 +185,12 @@ class _LoginScreenState extends State<LoginScreen> {
             letterSpacing: 1,
           ),
         ),
-      ),
+      ),*/
+
       body: Center(
+
+        child: Container(
+          padding: EdgeInsets.fromLTRB(10, 80, 10, 0),
         child: SingleChildScrollView(
           child: Container(
             color: Colors.white,
@@ -209,7 +225,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 15,
                     ),
                     SizedBox(
-                      height: 150,
+                      height: 90,
                     ),
                     noAcc,
                     SizedBox(
@@ -225,6 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
+      ),
       ),
     );
   }
