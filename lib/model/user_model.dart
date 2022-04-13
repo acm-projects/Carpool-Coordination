@@ -9,10 +9,11 @@ class UserModel {
   String? userType;
   String? model;
   String? licensePlate;
+  String? address;
 
 
 
-  UserModel({this.uid, this.email, this.firstName, this.secondName, this.userType, this.model, this.licensePlate});
+  UserModel({this.uid, this.email, this.firstName, this.secondName, this.userType, this.model, this.licensePlate, this.address});
 
   //retrieve data from server
 
@@ -25,6 +26,7 @@ class UserModel {
       userType: map['userType'],
       model: map['model'],
       licensePlate: map['licensePlate'],
+      address: map["address"],
     );
   }
 
@@ -38,6 +40,7 @@ class UserModel {
       'userType': userType,
       'model': model,
       'licensePlate': licensePlate,
+      'address': address,
     };
   }
 }

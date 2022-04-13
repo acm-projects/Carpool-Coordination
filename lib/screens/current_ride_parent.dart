@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:secondapp/globalvariable.dart';
 import 'package:secondapp/model/ride.dart';
 import 'package:secondapp/screens/map_screen.dart';
 import 'package:secondapp/screens/theme.dart';
@@ -26,7 +27,10 @@ class CRParent extends StatefulWidget {
 class _CRParentState extends State<CRParent> {
   DateTime _selectedDate = DateTime.now();
   String formattedDate = DateFormat('M/d/yyyy').format(DateTime.now());
+  String formattedTime = DateFormat('hh:mm').format(DateTime.now());
   var notifyHelper;
+
+  MyService _myService = MyService();
 
   final _auth = FirebaseAuth.instance;
   User? user = FirebaseAuth.instance.currentUser;
@@ -199,11 +203,10 @@ class _CRParentState extends State<CRParent> {
             child: ListView(
               shrinkWrap: true,
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                Map<String, dynamic> data =
-                    document.data()! as Map<String, dynamic>;
-                if (data['date'] == formattedDate) {
-                  return ExpansionTile(
-                      // the expandy thing
+                Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+
+                if(data['date'] == formattedDate){
+                  return ExpansionTile( // the expandy thing
                       tilePadding: const EdgeInsets.only(
                           left: 30.0, right: 30.0, top: 5.0, bottom: 5.0),
                       // text is further in
@@ -265,14 +268,16 @@ class _CRParentState extends State<CRParent> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  MapScreen()));
-                                    },
+                                  ElevatedButton(onPressed: () {
+                                    _myService.destinationAddress = data['destination'];
+                                    _myService.OriginAddress = data['origin'];
+
+                                    print(_myService.OriginAddress);
+                                    print(_myService.destinationAddress);
+
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) => MapScreen()));
+                                  },
                                     style: ElevatedButton.styleFrom(
                                         primary: Color.fromRGBO(51, 54, 82, 1),
                                         shape: RoundedRectangleBorder(

@@ -6,13 +6,17 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
+import 'package:secondapp/Services/LocalNotifyManager.dart';
 import 'package:secondapp/Services/theme_services.dart';
 import 'package:secondapp/model/ride.dart';
 import 'package:secondapp/screens/ScreenNavigator.dart';
 import 'package:secondapp/screens/calendar_screen.dart';
 import 'package:secondapp/screens/theme.dart';
 import 'package:secondapp/ui/widgets/button.dart';
+import '../globalvariable.dart';
+import '../model/user_model.dart';
 import '../ui/widgets/input_field.dart';
+
 
 
 class AddRidePage extends StatefulWidget {
@@ -23,7 +27,13 @@ class AddRidePage extends StatefulWidget {
 }
 
 class _AddRidePageState extends State<AddRidePage> {
-  final _auth = FirebaseAuth.instance;
+
+  User? user = FirebaseAuth.instance.currentUser;
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  UserModel loggedInUser = UserModel();
+
+  MyService _myService = MyService();
+
   final TextEditingController _parentController = TextEditingController();
   final TextEditingController _carpoolerEdititngController =
       TextEditingController();
@@ -33,6 +43,8 @@ class _AddRidePageState extends State<AddRidePage> {
   String _endTime = "9:30 PM";
   String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
   int _selectedRemind = 15;
+  int h = 0;
+  int m = 0;
   List<int> remindList = [
     30,
     45,
@@ -41,6 +53,19 @@ class _AddRidePageState extends State<AddRidePage> {
   int _selectedColor = 0;
   String _selectedRepeat = "None";
   List<String> repeatList = ["Daily", "Weekly", "Monthly"];
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      this.loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +209,14 @@ class _AddRidePageState extends State<AddRidePage> {
                 children: [
                   _colorPallete(),
                   MyButton(
-                      label: "Schedule Ride", onTap: () => _validateDate()),
+                      label: "Schedule Ride", onTap: () async {
+                        _validateDate();
+                        h = int.parse(_startTime.split(":")[0]) + 12;
+                        m = int.parse(_startTime.split(":")[1].split(" ")[0]);
+                        print(h);
+                        print(m);
+                        await localNotifyManager.showDailyAtTimeNotification(h, m,_parentController.text, _selectedRemind);
+                  }),
                 ],
               ),
             ],
@@ -327,12 +359,14 @@ class _AddRidePageState extends State<AddRidePage> {
     //sending these values
 
     CollectionReference rides = FirebaseFirestore.instance.collection('rides');
+
     rideModel ridemodel = rideModel();
 
     //writing all the values
-    ridemodel.uid = "Nn0dpcAZ9RMI2yqIyyfe";
+    ridemodel.uid = rides.id;
     ridemodel.parent = _parentController.text;
     ridemodel.carpooler = _carpoolerEdititngController.text;
+    ridemodel.origin = loggedInUser.address;
     ridemodel.destination = _addressEdititngController.text;
     ridemodel.date = DateFormat.yMd().format(_selectedDate);
     ridemodel.startTime = _startTime;
@@ -340,6 +374,9 @@ class _AddRidePageState extends State<AddRidePage> {
     ridemodel.color = _selectedColor;
     ridemodel.remind = _selectedRemind;
     ridemodel.repeat = _selectedRepeat;
+
+
+
     /*'uid' : uid,
     'parent' : parent,
     'carpooler': carpooler,

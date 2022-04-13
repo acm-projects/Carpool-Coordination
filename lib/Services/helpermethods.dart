@@ -16,7 +16,7 @@ class HelperMethods{
     );*/
 
     final Map<String, String> _queryParameters = <String, String>{
-      'latlng': "${position.latitude}${position.longitude}key=AIzaSyCnbekIXH6m8YiE1uam_D6qeh7ge5hZZQ8",
+      'latlng': "${position.latitude},${position.longitude}key=AIzaSyCnbekIXH6m8YiE1uam_D6qeh7ge5hZZQ8",
 
     };
     Uri url = Uri.https("maps.googleapis.com", "/maps/api/geocode/json", _queryParameters );
