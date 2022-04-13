@@ -231,19 +231,35 @@ class _CRParentState extends State<CRParent> {
                         ClipRRect(
                           // rounded the corners
                           borderRadius: BorderRadius.circular(15),
-
                           child: Container(
                             child: ListTile(
                               // drop down
                               contentPadding: EdgeInsets.only(
                                   left: 25.0, right: 30.0, bottom: 15.0),
-                              title: Text(
-                                '\tPick-Up Address: \n\t "child users address"\n\tDrop-Off Address: \n\t ${data['destination']}'
-                                '\n\tPassengers: \n\t ${data['carpooler']}',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                ),
+                              title: Column(
+                                children: [
+                                  Text(
+                                    'Pick-Up Time: ${data['startTime']}',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Drop-Off Address: ${data['destination']}',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Drop-Off Time:  ${data['endTime']}',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                ],
                               ),
                               trailing: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
