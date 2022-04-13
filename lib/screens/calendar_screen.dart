@@ -38,7 +38,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(245, 244, 249, 1),
       appBar: _appBar(),
       body: Column(
         children: [
@@ -238,7 +237,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               ),
             ),
           );
-  });
+        });
   }
 
   /*_showTasks() {
@@ -253,7 +252,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   children: [
                     GestureDetector(
                       onTap: (){
-
                       },
                       child: TaskTile(),
                     )
@@ -331,7 +329,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   _appBar() {
     return AppBar(
       elevation: 0,
-      backgroundColor: Color.fromRGBO(245, 244, 249, 1),//context.theme.backgroundColor,
+      backgroundColor: context.theme.backgroundColor,
       leading: GestureDetector(
         onTap: () {
           ThemeServices().switchTheme();

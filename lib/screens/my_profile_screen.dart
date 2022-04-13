@@ -118,9 +118,6 @@ class _ProfileAppState extends State<ProfileApp> {
                       ),
                       Text(
                         getUserType(),
-                        style: TextStyle(
-                          fontSize: 20.0,
-
                         style:  GoogleFonts.lato(
                           // TextStyle(
                           fontSize: 25.0,
