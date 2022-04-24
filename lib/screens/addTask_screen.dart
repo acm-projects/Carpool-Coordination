@@ -40,7 +40,7 @@ class _AddRidePageState extends State<AddRidePage> {
   final TextEditingController _addressEdititngController =
       TextEditingController();
   DateTime _selectedDate = DateTime.now();
-  String _endTime = "9:30 PM";
+  String _endTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
   String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
   int _selectedRemind = 15;
   int h = 0;
@@ -207,7 +207,9 @@ class _AddRidePageState extends State<AddRidePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _colorPallete(),
+                  SizedBox(
+                    width: 5,
+                  ),
                   MyButton(
                       label: "Schedule Ride", onTap: () async {
                         _validateDate();
@@ -219,6 +221,9 @@ class _AddRidePageState extends State<AddRidePage> {
                   }),
                 ],
               ),
+              SizedBox(
+                height: 5,
+              )
             ],
           ),
         ),
@@ -304,7 +309,8 @@ class _AddRidePageState extends State<AddRidePage> {
       ),
       actions: [
         CircleAvatar(
-          backgroundImage: AssetImage("Stray-Kids-Logo.png"),
+          radius: 24,
+          backgroundImage: AssetImage("Navy-Carpool-Coordination-No-Text.png"),
         ),
         SizedBox(
           width: 20,

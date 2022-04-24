@@ -326,12 +326,13 @@ class _CRParentState extends State<CRParent> {
         },
         child: Icon(
             Get.isDarkMode ? Icons.wb_sunny_outlined : Icons.nightlight_round,
-            size: 20,
+            size: 24,
             color: Get.isDarkMode ? Colors.white : Colors.black),
       ),
       actions: [
         CircleAvatar(
-          backgroundImage: AssetImage("Stray-Kids-Logo.png"),
+          radius: 24,
+          backgroundImage: AssetImage("Navy-Carpool-Coordination-No-Text.png"),
         ),
         SizedBox(
           width: 20,

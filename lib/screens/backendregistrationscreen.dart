@@ -97,13 +97,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        fillColor: Color.fromRGBO(239, 242, 249, 1),
+        fillColor: Colors.white, //Color.fromRGBO(239, 242, 249, 1),
         filled: true,
         //prefixIcon: Icon(Icons.account_circle),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Street Address",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
     );
@@ -274,149 +274,129 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(245, 244, 249, 1),
-      /*appBar: AppBar(
-        backgroundColor: Color.fromRGBO(51, 54, 82, 1),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(10),
-          ),
-        ),
-        title: Text(
-          'Carpool Coordination',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1,
-          ),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color.fromRGBO(250, 208, 44, 1)),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ),*/
+      backgroundColor: Color.fromRGBO(51, 54, 82, 1),
       body: Center(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 91,
-                      child: Image.asset(
-                        "assets/Stray-Kids-Logo.png",
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    firstNameField,
-                    SizedBox(
-                      height: 15,
-                    ),
-                    secondNameField,
-                    SizedBox(
-                      height: 15,
-                    ),
-                    emailField,
-                    SizedBox(
-                      height: 15,
-                    ),
-                    addressField,
-                    SizedBox(
-                      height: 15,
-                    ),
-                    passwordField,
-                    SizedBox(
-                      height: 15,
-                    ),
-                    confirmPasswordField,
-                    SizedBox(
-                      height: 15,
-                    ),
-                    parentChildQuestion,
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Container(
-                      child: new Row(
-                        children: <Widget>[
-                          //const Spacer(),
-                          Expanded(
-                            child: Center(
-                              child: ButtonTheme(
-                                minWidth: 130,
-                                height: 100,
-                                child: RaisedButton(
-                                  color: pressAttention1
-                                      ? _buttonColor2
-                                      : _buttonColor1,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)),
-                                  onPressed: () {
-                                    setState(() {
-                                      parentOrChild = "parents";
-                                    });
-                                  },
-                                  child: Text(
-                                    'Parent',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
+        child: Container(
+          padding: EdgeInsets.only(left: 10, right: 10,top: 10, bottom: 10),
+          child: SingleChildScrollView(
+            padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 120,
+                          child: Image.asset(
+                            "Purple-Carpool-Coordination.png",
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        firstNameField,
+                        SizedBox(
+                          height: 15,
+                        ),
+                        secondNameField,
+                        SizedBox(
+                          height: 15,
+                        ),
+                        emailField,
+                        SizedBox(
+                          height: 15,
+                        ),
+                        addressField,
+                        SizedBox(
+                          height: 15,
+                        ),
+                        passwordField,
+                        SizedBox(
+                          height: 15,
+                        ),
+                        confirmPasswordField,
+                        SizedBox(
+                          height: 15,
+                        ),
+                        parentChildQuestion,
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          child: new Row(
+                            children: <Widget>[
+                              //const Spacer(),
+                              Expanded(
+                                child: Center(
+                                  child: ButtonTheme(
+                                    minWidth: 120,
+                                    height: 90,
+                                    child: RaisedButton(
+                                      color: pressAttention1
+                                          ? _buttonColor2
+                                          : _buttonColor1,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20)),
+                                      onPressed: () {
+                                        setState(() {
+                                          parentOrChild = "parents";
+                                        });
+                                      },
+                                      child: Text(
+                                        'Parent',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Center(
-                              child: ButtonTheme(
-                                minWidth: 130,
-                                height: 100,
-                                child: RaisedButton(
-                                  child: Text(
-                                    'Child',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
+                              Expanded(
+                                child: Center(
+                                  child: ButtonTheme(
+                                    minWidth: 120,
+                                    height: 90,
+                                    child: RaisedButton(
+                                      child: Text(
+                                        'Child',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20)),
+                                      color: _buttonColor1,
+                                      onPressed: () {
+                                        setState(() {
+                                          parentOrChild = "children";
+                                        });
+                                      },
+                                    ),
                                   ),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)),
-                                  color: _buttonColor1,
-                                  onPressed: () {
-                                    setState(() {
-                                      parentOrChild = "children";
-                                    });
-                                  },
                                 ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(
+                          height:35,
+                        ),
+                        signUpButton,
+
+                      ],
                     ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    signUpButton,
-                    SizedBox(
-                      height: 15,
-                    )
-                  ],
+                  ),
                 ),
               ),
             ),

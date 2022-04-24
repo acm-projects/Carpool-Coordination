@@ -4,7 +4,6 @@ import 'dart:io' show Platform;
 import 'package:rxdart/subjects.dart';
 
 class LocalNotifyManager {
-
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   var initSetting;
@@ -108,7 +107,8 @@ class LocalNotifyManager {
         payload: 'New Payload');
   }
 
-  Future<void> showDailyAtTimeNotification(var h, var m, String driver, int reminder) async {
+  Future<void> showDailyAtTimeNotification(
+      var h, var m, String driver, int reminder) async {
     var time = Time(h, m, 0);
     var androidChannel = AndroidNotificationDetails(
         'CHANNEL_ID', 'CHANNEL_NAME',

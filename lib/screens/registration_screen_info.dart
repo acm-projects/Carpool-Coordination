@@ -16,8 +16,7 @@ class RegistrationScreenInfo extends StatefulWidget {
 
 class _RegistrationScreenInfoState extends State<RegistrationScreenInfo> {
   final _auth = FirebaseAuth.instance;
-  CollectionReference users =
-  FirebaseFirestore.instance.collection('users');
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   final modelEditingController = new TextEditingController();
   final licensePlateEditingController = new TextEditingController();
@@ -44,7 +43,8 @@ class _RegistrationScreenInfoState extends State<RegistrationScreenInfo> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        fillColor: Colors.white, //Color.fromRGBO(239, 242, 249, 1),
+        fillColor: Colors.white,
+        //Color.fromRGBO(239, 242, 249, 1),
         filled: true,
         //prefixIcon: Icon(Icons.account_circle),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -75,7 +75,8 @@ class _RegistrationScreenInfoState extends State<RegistrationScreenInfo> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        fillColor: Colors.white, //Color.fromRGBO(239, 242, 249, 1),
+        fillColor: Colors.white,
+        //Color.fromRGBO(239, 242, 249, 1),
         filled: true,
         //prefixIcon: Icon(Icons.account_circle),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -95,8 +96,7 @@ class _RegistrationScreenInfoState extends State<RegistrationScreenInfo> {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: 38,
         onPressed: () {
-          Navigator.push(
-              context,
+          Navigator.push(context,
               MaterialPageRoute(builder: (context) => ScreenNavigator()));
           updateUser();
         },
@@ -110,8 +110,7 @@ class _RegistrationScreenInfoState extends State<RegistrationScreenInfo> {
     );
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(245, 244, 249, 1),
-
+      backgroundColor: Color.fromRGBO(51, 54, 82, 1),
       /*appBar: AppBar(
         backgroundColor: Color.fromRGBO(51, 54, 82, 1),
         shape: RoundedRectangleBorder(
@@ -137,61 +136,64 @@ class _RegistrationScreenInfoState extends State<RegistrationScreenInfo> {
         ),
       ),*/
       body: Center(
-    child: SingleChildScrollView(
-    child: Container(
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Form(
-          //key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                height: 0,
-              ),
-              SizedBox(
-                height: 91,
-                child: Image.asset(
-                  "assets/Stray-Kids-Logo.png",
-                  fit: BoxFit.contain,
+        child: Container(
+          padding: EdgeInsets.only(left: 10,top: 100,right: 10,bottom: 100),
+          child: SingleChildScrollView(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: Form(
+                    //key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 0,
+                        ),
+                        SizedBox(
+                          height: 160,
+                          child: Image.asset(
+                            "assets/Purple-Carpool-Coordination.png",
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        carModelQuestion,
+                        SizedBox(
+                          height: 10,
+                        ),
+                        carModelField,
+                        SizedBox(
+                          height: 45,
+                        ),
+                        plateNumQuestion,
+                        SizedBox(
+                          height: 05,
+                        ),
+                        plateNumField,
+                        SizedBox(
+                          height: 55,
+                        ),
+                        completeButton,
+                        SizedBox(
+                          height: 15,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-              SizedBox(
-                height: 30,
-              ),
-              carModelQuestion,
-              SizedBox(
-                height: 05,
-              ),
-              carModelField,
-              SizedBox(
-                height: 15,
-              ),
-              plateNumQuestion,
-              SizedBox(
-                height: 05,
-              ),
-              plateNumField,
-              SizedBox(
-                height: 15,
-              ),
-              completeButton,
-              SizedBox(
-                height: 15,
-              ),
-            ],
+            ),
           ),
         ),
       ),
-    ),)
-    ,
-    )
-    ,
     );
   }
-
 
   Future<void> updateUser() {
     User? user = _auth.currentUser;
@@ -201,9 +203,9 @@ class _RegistrationScreenInfoState extends State<RegistrationScreenInfo> {
     return users
         .doc(user?.uid)
         .update({
-      'model': model,
-      'licensePlate': licensePlateNum,
-    })
+          'model': model,
+          'licensePlate': licensePlateNum,
+        })
         .then((value) => print("User Updated"))
         .catchError((error) => print("Failed to update user: $error"));
   }

@@ -26,40 +26,37 @@ class _DriveHistoryState extends State<DriveHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Color.fromRGBO(51, 54, 82, 1),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(10),
-          ),
-        ),
-        title: Text(
-          'Carpool Coordination',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1,
-          ),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        leading: IconButton(
-          icon:
-          Icon(Icons.arrow_back, color: Color.fromRGBO(250, 208, 44, 1)),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              child: _showTasks(),
+      backgroundColor: Color.fromRGBO(245, 244, 249, 1),
+      appBar: _appBar(),
+
+      body: Container(
+        padding: EdgeInsets.only( top: 10, bottom: 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: 10),
+
+              //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              child: Text(
+                "\tRide History",
+                textAlign: TextAlign.left,
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                  ),
+                ),
+              ),
             ),
-          )
-        ],
+            Expanded(
+              child: Container(
+                child: _showTasks(),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -128,7 +125,14 @@ class _DriveHistoryState extends State<DriveHistory> {
                               ),
                               SizedBox(height: 10),
                               Text(
-                                "Parent: ${data['parent']}              Carpoolers: ${data['carpooler']}",
+                                "Parent: ${data['parent']}",
+                                style: GoogleFonts.lato(
+                                  textStyle: TextStyle(fontSize: 15, color: Colors.grey[100]),
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                "Carpoolers: ${data['carpooler']}",
                                 style: GoogleFonts.lato(
                                   textStyle: TextStyle(fontSize: 15, color: Colors.grey[100]),
                                 ),
@@ -139,7 +143,6 @@ class _DriveHistoryState extends State<DriveHistory> {
                                 style: GoogleFonts.lato(
                                   textStyle: TextStyle(fontSize: 15, color: Colors.grey[100]),
                                 ),
-
                               )
                             ],
                           ),
@@ -173,6 +176,38 @@ class _DriveHistoryState extends State<DriveHistory> {
             ),
           );
         });
+  }
+  _appBar() {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Color.fromRGBO(245, 244, 249, 1),//context.theme.backgroundColor,
+      leading: GestureDetector(
+        onTap: () {
+          ThemeServices().switchTheme();
+          notifyHelper.displayNotification(
+            title: "Theme Changed",
+            body: Get.isDarkMode
+                ? "Activated Light Theme"
+                : "Activated Dark Theme",
+          );
+
+          notifyHelper.scheduledNotification();
+        },
+        child: Icon(
+            Get.isDarkMode ? Icons.wb_sunny_outlined : Icons.nightlight_round,
+            size: 24,
+            color: Get.isDarkMode ? Colors.white : Colors.black),
+      ),
+      actions: [
+        CircleAvatar(
+          radius: 24,
+          backgroundImage: AssetImage("Navy-Carpool-Coordination-No-Text.png"),
+        ),
+        SizedBox(
+          width: 20,
+        ),
+      ],
+    );
   }
 }
 

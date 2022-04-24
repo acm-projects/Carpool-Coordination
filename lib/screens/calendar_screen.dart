@@ -12,6 +12,7 @@ import 'package:secondapp/screens/addTask_screen.dart';
 import 'package:secondapp/screens/theme.dart';
 import 'package:secondapp/ui/widgets/button.dart';
 import 'package:secondapp/ui/widgets/task_tile.dart';
+import '/Services/LocalNotifyManager.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({Key? key}) : super(key: key);
@@ -320,8 +321,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
               ],
             ),
           ),
-          MyButton(label: "+ Plan Trip", onTap: () => Get.to(AddRidePage()))
-        ],
+          MyButton (
+              label: "+ Plan Trip", onTap: () async {
+                Get.to(AddRidePage());
+                await localNotifyManager.showNotification();
+              },
+          )
+        ]
       ),
     );
   }
@@ -344,12 +350,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
         },
         child: Icon(
             Get.isDarkMode ? Icons.wb_sunny_outlined : Icons.nightlight_round,
-            size: 20,
+            size: 24,
             color: Get.isDarkMode ? Colors.white : Colors.black),
       ),
       actions: [
         CircleAvatar(
-          backgroundImage: AssetImage("Stray-Kids-Logo.png"),
+          radius: 24,
+          backgroundImage: AssetImage("Navy-Carpool-Coordination-No-Text.png"),
         ),
         SizedBox(
           width: 20,

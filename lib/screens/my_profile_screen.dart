@@ -66,12 +66,12 @@ class _ProfileAppState extends State<ProfileApp> {
           children: [
             Container(
               decoration: BoxDecoration(
-                color:  Color.fromRGBO(239, 240, 254, 1),
+                color:  primaryClr,
                 borderRadius: BorderRadius.circular(15),
               ),
               child: Container(
                 width: double.infinity,
-                height: 350.0,
+                height: 325.0,
                 child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,9 +85,11 @@ class _ProfileAppState extends State<ProfileApp> {
                         ),
                       ),
                       CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Images.png'),
-                        radius: 70.0,
+                        backgroundColor: Colors.white,
+                       /* backgroundImage: NetworkImage(
+                            'https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Images.png'),*/
+                        backgroundImage: AssetImage("Navy-Carpool-Coordination-No-Text.png"),
+                        radius: 60.0,
                       ),
                       SizedBox(
                         height: 10.0,
@@ -103,8 +105,8 @@ class _ProfileAppState extends State<ProfileApp> {
                         "${loggedInUser.firstName} ${loggedInUser.secondName}",
                         style:  GoogleFonts.lato(
                          // TextStyle(
-                          fontSize: 30.0,
-                          color: Colors.black,
+                          fontSize: 28.0,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                       //  ),
                         ),
@@ -113,16 +115,16 @@ class _ProfileAppState extends State<ProfileApp> {
                         " ",
                         style: TextStyle(
                           fontSize: 5.0,
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                       ),
                       Text(
                         getUserType(),
                         style:  GoogleFonts.lato(
                           // TextStyle(
-                          fontSize: 25.0,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.normal,
                           //  ),
                         ),
 
@@ -170,8 +172,8 @@ class _ProfileAppState extends State<ProfileApp> {
                   child: Ink(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                          begin: Alignment.centerRight,
-                          end: Alignment.centerLeft,
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
                           colors: [
                             primaryClr,
                            primaryClr,

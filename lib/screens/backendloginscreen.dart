@@ -169,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(245, 244, 249, 1),
+      backgroundColor: Color.fromRGBO(51, 54, 82, 1),
       /*appBar: AppBar(
         backgroundColor: Color.fromRGBO(51, 54, 82, 1),
         shape: RoundedRectangleBorder(
@@ -188,54 +188,59 @@ class _LoginScreenState extends State<LoginScreen> {
       ),*/
 
       body: Center(
-
         child: Container(
-          padding: EdgeInsets.fromLTRB(10, 80, 10, 0),
+          padding: EdgeInsets.only(left: 10,top: 40,right: 10,bottom: 0),
         child: SingleChildScrollView(
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 150,
-                      child: Image.asset(
-                        "assets/Stray-Kids-Logo.png",
-                        fit: BoxFit.contain,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Container(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 45,
-                    ),
-                    emailField,
-                    SizedBox(
-                      height: 10,
-                    ),
-                    passwordField,
-                    SizedBox(
-                      height: 35,
-                    ),
-                    loginButton,
-                    SizedBox(
-                      height: 15,
-                    ),
-                    SizedBox(
-                      height: 90,
-                    ),
-                    noAcc,
-                    SizedBox(
-                      height: 15,
-                    ),
-                    signUpButton,
-                    SizedBox(
-                      height: 15,
-                    ),
-                  ],
+                      SizedBox(
+                        height: 170,
+                        child: Image.asset(
+                          "assets/Purple-Carpool-Coordination.png",
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      emailField,
+                      SizedBox(
+                        height: 10,
+                      ),
+                      passwordField,
+                      SizedBox(
+                        height: 35,
+                      ),
+                      loginButton,
+                      SizedBox(
+                        height: 15,
+                      ),
+                      SizedBox(
+                        height: 90,
+                      ),
+                      noAcc,
+                      SizedBox(
+                        height: 15,
+                      ),
+                      signUpButton,
+                      SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

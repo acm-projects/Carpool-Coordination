@@ -27,72 +27,65 @@ class _ScreenNavigatorState extends State<ScreenNavigator> {
   Widget build(BuildContext context) {
     switch (_index) {
       case 0:
-        child = CreateEvent();
-        break;
-      case 1:
         child = CalendarScreen();
         break;
-      case 2:
+      case 1:
         child = CRParent();
         break;
-      case 3:
+      case 2:
         child = DriveHistory();
         break;
-      case 4:
+      case 3:
         child = ProfileApp();
         break;
     }
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(245, 244, 249, 1), // Color.fromRGBO(0, 53, 102, 1),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
-      child: BottomNavigationBar(
-        currentIndex: _index,
-        onTap: (int index) => setState(() => _index = index),
-        backgroundColor: Color.fromRGBO(32, 33, 60, 1),
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        iconSize: 30.0,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.people_rounded,
-              color: Colors.white,
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.only(bottom: 10, left: 5, right: 5),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+        child: BottomNavigationBar(
+          currentIndex: _index,
+          onTap: (int index) => setState(() => _index = index),
+          backgroundColor: Color.fromRGBO(32, 33, 60, 1),
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          iconSize: 30.0,
+
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.calendar_month_rounded,
+                color: Colors.white,
+              ),
+              label: 'Schedule',
             ),
-            label: 'My Groups',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.calendar_month_rounded,
-              color: Colors.white,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home_rounded,
+                color: Colors.white,
+              ),
+              label: 'Home',
             ),
-            label: 'Schedule',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_rounded,
-              color: Colors.white,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.history_rounded,
+                color: Colors.white,
+              ),
+              label: 'history',
             ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.history_rounded,
-              color: Colors.white,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.person_rounded,
+                color: Colors.white,
+              ),
+              label: 'profile',
             ),
-            label: 'history',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_rounded,
-              color: Colors.white,
-            ),
-            label: 'profile',
-          ),
-        ],
-      ),
+          ],
+        ),
+        ),
       ),
       body: Center(
         child: SizedBox.expand(
